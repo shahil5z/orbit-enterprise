@@ -32,6 +32,14 @@ class Repository(InsightQueries):
         with self._conn() as c:
             return c.execute(sql, params).fetchone()
 
+    def artifact(self, name: str) -> dict | list | None:
+        """A JSON artifact published by database/seeds/publish.py (hosted deployments have no data/outputs)."""
+        try:
+            row = self._one("SELECT body FROM artifacts WHERE name = %s", (name,))
+        except psycopg.errors.UndefinedTable:
+            return None
+        return row["body"] if row else None
+
     def ping(self) -> dict:
         return self._one("SELECT version() AS version, current_database() AS database")
 

@@ -18,16 +18,16 @@ function Probe() {
 
 describe("global filters", () => {
   it("reads from the URL first", () => {
-    render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={["/x?region_id=R02"]}><FilterProvider><Probe /></FilterProvider></MemoryRouter>);
+    render(<MemoryRouter initialEntries={["/x?region_id=R02"]}><FilterProvider><Probe /></FilterProvider></MemoryRouter>);
     expect(screen.getByTestId("region")).toHaveTextContent("R02");
   });
   it("writes to URL and localStorage, and restores from storage", () => {
-    const { unmount } = render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={["/x"]}><FilterProvider><Probe /></FilterProvider></MemoryRouter>);
+    const { unmount } = render(<MemoryRouter initialEntries={["/x"]}><FilterProvider><Probe /></FilterProvider></MemoryRouter>);
     act(() => screen.getByText("set").click());
     expect(screen.getByTestId("url")).toHaveTextContent("region_id=R04");
     expect(JSON.parse(localStorage.getItem("orbit.filters")!)).toMatchObject({ region_id: "R04" });
     unmount();
-    render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} initialEntries={["/y"]}><FilterProvider><Probe /></FilterProvider></MemoryRouter>);
+    render(<MemoryRouter initialEntries={["/y"]}><FilterProvider><Probe /></FilterProvider></MemoryRouter>);
     expect(screen.getByTestId("region")).toHaveTextContent("R04");
     act(() => screen.getByText("reset").click());
     expect(screen.getByTestId("active")).toHaveTextContent("0");

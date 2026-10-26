@@ -36,7 +36,7 @@ describe("status semantics are not colour-only", () => {
     expect(screen.getByText(/HIGH 58\.4/)).toBeInTheDocument();
   });
   it("status indicator carries text", () => {
-    render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><StatusIndicator status="FAILED" /></MemoryRouter>);
+    render(<MemoryRouter><StatusIndicator status="FAILED" /></MemoryRouter>);
     expect(screen.getByText("FAILED")).toBeInTheDocument();
   });
   it("dataset health thresholds", () => {

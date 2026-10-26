@@ -11,8 +11,9 @@ export default defineConfig({
   use: { baseURL: process.env.ORBIT_WEB_URL ?? "http://127.0.0.1:4173", trace: "retain-on-failure" },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } }, testIgnore: /screenshots/ },
-    { name: "laptop", use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 720 } }, grep: /every page/, testIgnore: /screenshots/ },
-    { name: "tablet", use: { ...devices["Desktop Chrome"], viewport: { width: 820, height: 1180 } }, grep: /every page/, testIgnore: /screenshots/ },
+    { name: "laptop", use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 720 } }, grep: /every page|deep links/, testIgnore: /screenshots/ },
+    { name: "tablet", use: { ...devices["Desktop Chrome"], viewport: { width: 820, height: 1180 } }, grep: /every page|deep links/, testIgnore: /screenshots/ },
+    { name: "mobile", use: { ...devices["Desktop Chrome"], viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, grep: /every page|deep links/, testIgnore: /screenshots/ },
     { name: "screenshots", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } }, testMatch: /screenshots/ },
   ],
 });

@@ -144,7 +144,10 @@ export interface OptimizationDetail extends OptimizationRun {
 export interface OptimizationResult {
   optimization_id: string; run_id: string; status: string; parameters: OptimizationParams; objective: number; baseline_objective: number;
   improvement_abs: number; improvement_pct: number; by_region: RegionAllocation[]; assumptions: Record<string, unknown>;
+  /** "persisted" when the hosted API has no solver and returned the latest stored run instead. */
+  mode?: "persisted"; message?: string;
 }
+export interface Capabilities { environment: "local" | "dev" | "prod"; optimization_solver: boolean; note: string | null }
 
 export interface TraceLevel {
   level: "recommendation" | "forecast" | "model_output" | "metric" | "dataset"; title: string; ref: string; detail?: string; confidence?: number;

@@ -31,14 +31,18 @@ _configured = False
 def get_logger(name: str) -> logging.Logger:
     global _configured
     if not _configured:
-        PATHS.logs.mkdir(parents=True, exist_ok=True)
         root = logging.getLogger("orbit")
         root.setLevel(SETTINGS.log_level)
-        fh = logging.FileHandler(PATHS.logs / "orbit.jsonl", encoding="utf-8")
-        fh.setFormatter(JsonFormatter())
+        try:
+            PATHS.logs.mkdir(parents=True, exist_ok=True)
+            fh = logging.FileHandler(PATHS.logs / "orbit.jsonl", encoding="utf-8")
+            fh.setFormatter(JsonFormatter())
+            root.addHandler(fh)
+        except OSError:
+            # Read-only filesystems (serverless) log to stderr only.
+            pass
         sh = logging.StreamHandler(sys.stderr)
         sh.setFormatter(JsonFormatter())
-        root.addHandler(fh)
         root.addHandler(sh)
         root.propagate = False
         _configured = True

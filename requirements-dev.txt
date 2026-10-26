@@ -1,0 +1,10 @@
+# Workstation toolchain: pipelines, ML training, local API server, tests (Python 3.13)
+-r requirements.txt
+pyarrow==26.0.0
+scipy==1.18.1
+scikit-learn==1.9.1
+statsmodels==0.15.0
+uvicorn==0.54.0
+pydantic-settings==2.16.1
+httpx==0.28.1
+pytest==9.1.1

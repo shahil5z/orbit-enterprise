@@ -20,14 +20,19 @@ const FIELDS: { key: keyof OptimizationParams; label: string; min: number; max: 
 export default function OptimizationPage() {
   const [p, setP] = useState<OptimizationParams>(DEFAULTS);
   const runs = useApi("opt-runs", () => api.optimizationRuns(20));
+  const caps = useApi("capabilities", () => api.capabilities());
+  const hosted = caps.data?.optimization_solver === false;
   const run = useMutation(useCallback((x: OptimizationParams) => api.runOptimization(x), []));
+  const [persistedNote, setPersistedNote] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [compare, setCompare] = useState<string | null>(null);
   const current = selected ?? runs.data?.runs[0]?.optimization_id ?? null;
   const submit = async () => {
     const before = current;
     const r = await run.run(p);
-    if (r) { setCompare(before); setSelected(r.optimization_id); runs.reload(); }
+    if (!r) return;
+    if (r.mode === "persisted") { setPersistedNote(r.message ?? "Showing the latest persisted run."); setSelected(r.optimization_id); return; }
+    setPersistedNote(null); setCompare(before); setSelected(r.optimization_id); runs.reload();
   };
   return (
     <Page title="Optimization Center" intro="Each run calls the Julia JuMP + HiGHS mixed-integer model on the server. Objective = expected incremental gross margin from marketing spend and hires, subject to budget, hiring, risk and regional minimum constraints.">
@@ -44,10 +49,12 @@ export default function OptimizationPage() {
               </div>
             ))}
             <div className="row">
-              <Button variant="primary" type="submit" disabled={run.status === "loading"} data-testid="run-optimization">{run.status === "loading" ? "Solving" : "Run optimizer"}</Button>
+              <Button variant="primary" type="submit" disabled={run.status === "loading"} data-testid="run-optimization">{run.status === "loading" ? "Solving" : hosted ? "Show latest persisted run" : "Run optimizer"}</Button>
               <Button onClick={() => setP(DEFAULTS)}>Reset</Button>
             </div>
-            {run.status === "loading" && <p className="small muted" role="status">Julia is solving; the first run can take 20 to 60 seconds while Julia compiles.</p>}
+            {hosted && <p className="notice small" role="note" data-testid="runs-locally">{caps.data?.note} The Julia JuMP + HiGHS solver runs locally; run <code>scripts/orbit.ps1 dev</code> on the workstation to solve new parameters.</p>}
+            {persistedNote && <p className="notice small" role="status" data-testid="persisted-note">{persistedNote}</p>}
+            {run.status === "loading" && !hosted && <p className="small muted" role="status">Julia is solving; the first run can take 20 to 60 seconds while Julia compiles.</p>}
             {run.status === "error" && run.error && <ErrorState title="Optimization failed" error={run.error} onRetry={() => void submit()} />}
           </form>
         </Card>

@@ -9,7 +9,7 @@
 param(
   [Parameter(Position = 0)]
   [ValidateSet("help", "versions", "install", "setup", "db-start", "db-stop", "migrate", "seed", "pipeline", "stage",
-               "train", "test", "dev", "api", "java", "java-test", "web-install", "web-dev", "web-build", "web-preview", "web-test", "e2e", "screenshots", "bi-export", "web-check")]
+               "train", "test", "dev", "api", "java", "java-test", "web-install", "web-dev", "web-build", "web-preview", "web-test", "e2e", "screenshots", "bi-export", "web-check", "publish-hosted")]
   [string]$Command = "help",
   [Parameter(Position = 1, ValueFromRemainingArguments = $true)]
   [string[]]$Rest
@@ -45,14 +45,14 @@ function Get-JavaClasses {
 }
 
 switch ($Command) {
-  "help" { Get-Help $PSCommandPath -Detailed; Write-Host "Commands: versions install setup db-start db-stop migrate seed pipeline stage <name...> train test dev api java java-test web-install web-dev web-build web-preview web-test e2e screenshots bi-export web-check" }
+  "help" { Get-Help $PSCommandPath -Detailed; Write-Host "Commands: versions install setup db-start db-stop migrate seed pipeline stage <name...> train test dev api java java-test web-install web-dev web-build web-preview web-test e2e screenshots bi-export web-check publish-hosted" }
   "versions" {
     python --version; java -version 2>&1 | Select-Object -First 1; node --version; rustc --version; g++ --version | Select-Object -First 1
     Rscript --version; julia --version; postgres --version; git --version
   }
   "install" {
     if (-not (Test-Path "$T\venv\Scripts\python.exe")) { Invoke-Checked "python" @("-m", "venv", "$T\venv") }
-    Invoke-Checked "$T\venv\Scripts\python.exe" @("-m", "pip", "install", "-r", "requirements.txt")
+    Invoke-Checked "$T\venv\Scripts\python.exe" @("-m", "pip", "install", "-r", "requirements-dev.txt")
     Invoke-Checked "julia" @("--project=analytics/julia", "analytics/julia/install.jl")
     Invoke-Checked "Rscript" @("-e", "if (!requireNamespace('jsonlite', quietly=TRUE)) install.packages('jsonlite', lib=Sys.getenv('R_LIBS_USER'), repos='https://cloud.r-project.org')")
     Push-Location apps\web; Invoke-Checked "npm" @("install", "--no-audit", "--no-fund", "--cache", "$T\npm-cache"); Pop-Location
@@ -67,6 +67,7 @@ switch ($Command) {
   "db-start" { Start-Db }
   "db-stop" { Invoke-Checked "pg_ctl" @("-D", (Join-Path $T "pgdata"), "stop") }
   "migrate" { Invoke-Checked "python" @("-c", "from database.db import migrate; print('applied:', migrate())") }
+  "publish-hosted" { Start-Db; Invoke-Checked "python" @("-m", "database.seeds.publish") }
   "seed" { Start-Db; Invoke-Checked "python" @("-m", "pipelines.orchestrator", "publish") }
   "pipeline" { Start-Db; Invoke-Checked "python" (@("-m", "pipelines.orchestrator", "all") + $Rest) }
   "stage" { if (-not $Rest) { throw "usage: orbit.ps1 stage <ingest|validate|transform|curate|analyze|train|predict|risk|optimize|decision|publish> [...]" }

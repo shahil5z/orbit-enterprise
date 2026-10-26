@@ -16,6 +16,7 @@ from orbit_core.logging import get_logger, log
 
 from .envelope import fail, ok
 from .repository import Repository
+from .security import HardeningMiddleware
 from .insights import InsightService
 from .routes_insights import build_insights_router
 from .services import Conflict, NotFound, OrbitService
@@ -31,14 +32,22 @@ class OptimizationParams(BaseModel):
     min_region_share: float = Field(0.85, ge=0.5, le=1.0, description="minimum share of baseline spend per region")
 
 
-def create_app(repo: Repository | None = None) -> FastAPI:
-    app = FastAPI(title="ORBIT // ENTERPRISE API", version="2.0.0",
+def create_app(repo: Repository | None = None, local_engines: bool | None = None) -> FastAPI:
+    problems = SETTINGS.problems()
+    if problems:
+        raise RuntimeError("invalid production configuration: " + "; ".join(problems))
+    prod = SETTINGS.env == "prod"
+    app = FastAPI(title="ORBIT // ENTERPRISE API", version="2.1.0",
                   description="Decision intelligence API over simulated enterprise data. All responses use the "
-                              "envelope {success, data, metadata, errors}.")
-    app.state.service = OrbitService(repo or Repository())
+                              "envelope {success, data, metadata, errors}.",
+                  docs_url=None if prod else "/docs", redoc_url=None, openapi_url="/api/v1/openapi.json" if prod
+                  else "/openapi.json")
+    app.state.service = OrbitService(repo or Repository(), local_engines=local_engines)
     app.state.insights = InsightService(app.state.service)
     app.add_middleware(CORSMiddleware, allow_origins=list(SETTINGS.cors_origins), allow_methods=["GET", "POST"],
                        allow_headers=["Content-Type"])
+    app.add_middleware(HardeningMiddleware, max_body_bytes=SETTINGS.max_body_bytes,
+                       rate_per_min=SETTINGS.rate_limit_per_min, hsts=prod)
 
     @app.exception_handler(NotFound)
     async def _nf(_: Request, exc: NotFound):
@@ -64,7 +73,8 @@ def create_app(repo: Repository | None = None) -> FastAPI:
     @app.exception_handler(psycopg.OperationalError)
     async def _db(request: Request, exc: psycopg.OperationalError):
         log(logger, "database_unavailable", path=request.url.path, error_type=type(exc).__name__)
-        return fail(503, "DATABASE_UNAVAILABLE", "database unavailable; start PostgreSQL (scripts/orbit.ps1 db-start)")
+        return fail(503, "DATABASE_UNAVAILABLE", "database unavailable" if SETTINGS.env == "prod" else
+                    "database unavailable; start PostgreSQL (scripts/orbit.ps1 db-start)")
 
     @app.exception_handler(Exception)
     async def _any(request: Request, exc: Exception):
@@ -87,6 +97,10 @@ def build_router() -> APIRouter:
     @r.get("/health", tags=["system"])
     def health(s: OrbitService = Depends(svc)):
         return ok(s.health())
+
+    @r.get("/capabilities", tags=["system"])
+    def capabilities(s: OrbitService = Depends(svc)):
+        return ok({"environment": SETTINGS.env, **s.capabilities()})
 
     @r.get("/data/quality", tags=["data"])
     def quality(s: OrbitService = Depends(svc)):
@@ -143,7 +157,8 @@ def build_router() -> APIRouter:
     @r.post("/optimization/run", tags=["optimization"], status_code=201)
     def run_optimization(params: OptimizationParams = Body(default_factory=OptimizationParams),
                          s: OrbitService = Depends(svc)):
-        return ok(s.run_optimization(params.model_dump()), status_code=201)
+        d = s.run_optimization(params.model_dump())
+        return ok(d, status_code=200 if d.get("mode") == "persisted" else 201)
 
     @r.get("/models", tags=["ml"])
     def models(s: OrbitService = Depends(svc)):

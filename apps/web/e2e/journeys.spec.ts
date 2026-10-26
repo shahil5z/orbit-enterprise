@@ -38,8 +38,20 @@ test("overview > declining trend > anomaly > forecast > risk > recommendation", 
 test("optimization: change constraints > run > compare", async ({ page }) => {
   test.setTimeout(180_000);
   const errors = watchConsole(page);
+  const capsRes = await page.request.get("/api/v1/capabilities");
+  const caps = await capsRes.json();
+  expect(capsRes.status(), JSON.stringify(caps)).toBe(200);
   await page.goto("/optimization");
   await expect(page.getByTestId("optimization-result")).toBeVisible();
+  if (caps.data.optimization_solver === false) {
+    // Hosted deployment: no Julia. The UI must say so and show the latest persisted run, never a fake solve.
+    await expect(page.getByTestId("runs-locally")).toContainText("runs locally");
+    await page.getByTestId("run-optimization").click();
+    await expect(page.getByTestId("persisted-note")).toContainText("latest persisted run");
+    await expect(page.getByTestId("optimization-result")).toContainText("Optimized objective");
+    expect(errors).toEqual([]);
+    return;
+  }
   const hires = page.getByLabel("Total hires");
   await hires.fill("55");
   await page.getByLabel("Budget multiplier").fill("1.15");
@@ -86,6 +98,17 @@ test("every page renders without console errors", async ({ page }) => {
     await expect(page.locator(".state-error")).toHaveCount(0);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, `horizontal overflow on ${p}`).toBeLessThanOrEqual(1);
+  }
+  expect(errors).toEqual([]);
+});
+
+test("deep links survive a hard refresh (SPA routing)", async ({ page }) => {
+  const errors = watchConsole(page);
+  for (const p of ["/risk", "/forecasts?region_id=R02", "/decisions", "/no-such-page"]) {
+    const res = await page.goto(p);
+    expect(res?.status(), p).toBe(200);
+    await page.reload();
+    await expect(page.locator("#root")).not.toBeEmpty();
   }
   expect(errors).toEqual([]);
 });

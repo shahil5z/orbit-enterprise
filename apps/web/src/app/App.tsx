@@ -24,7 +24,7 @@ const S = ({ children }: { children: ReactNode }) => <ErrorBoundary><Suspense fa
 
 export function App() {
   return (
-    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <BrowserRouter>
       <FilterProvider>
         <ReferenceProvider>
           <Routes>

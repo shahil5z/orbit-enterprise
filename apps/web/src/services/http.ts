@@ -1,7 +1,9 @@
 // The only module allowed to call fetch (enforced by eslint no-restricted-globals).
 import type { ApiErrorItem, Envelope } from "../types/api";
 
-export const API_BASE = "/api/v1";
+// Same-origin by default (Vercel serves the web app and the API together). VITE_API_BASE_URL is the only
+// build-time value exposed to the client and must be a public URL, never a secret.
+export const API_BASE = `${(import.meta.env.VITE_API_BASE_URL ?? "").replace(/\/$/, "")}/api/v1`;
 
 export class ApiError extends Error {
   constructor(public readonly status: number, public readonly errors: ApiErrorItem[]) {
@@ -27,7 +29,7 @@ export async function request<T>(path: string, init?: RequestInit): Promise<T> {
     });
   } catch (e) {
     if ((e as Error).name === "AbortError") throw e;
-    throw new ApiError(0, [{ code: "NETWORK", message: "API unreachable. Is the backend running on port 8000?" }]);
+    throw new ApiError(0, [{ code: "NETWORK", message: "API unreachable. Check your connection and retry." }]);
   }
   timings.push({ path, ms: Math.round(performance.now() - t0), status: res.status });
   if (timings.length > 50) timings.shift();

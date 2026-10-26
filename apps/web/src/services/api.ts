@@ -1,5 +1,5 @@
 import type {
-  AnomalyDetail, AnomalyPage, DecisionTrace, Dimensions, ForecastSeries, Health, Intelligence, Kpi, ModelInfo, OpsSummary,
+  AnomalyDetail, Capabilities, AnomalyPage, DecisionTrace, Dimensions, ForecastSeries, Health, Intelligence, Kpi, ModelInfo, OpsSummary,
   OptimizationDetail, OptimizationParams, OptimizationResult, OptimizationRun, Overview, Quality, QualityDetail, Recommendation,
   Risk, RiskDetail, MonteCarlo, ScenarioResult, SearchResponse, SystemInfo, LeverKey,
 } from "../types/api";
@@ -18,6 +18,7 @@ const post = (body: unknown): RequestInit => ({ method: "POST", body: JSON.strin
 
 export const api = {
   health: () => request<Health>("/health"),
+  capabilities: () => request<Capabilities>("/capabilities"),
   kpis: () => request<{ kpis: Kpi[] }>("/kpis"),
   dimensions: () => request<Dimensions>("/dimensions"),
   overview: () => request<Overview>("/overview"),

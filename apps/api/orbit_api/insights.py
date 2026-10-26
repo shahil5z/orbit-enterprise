@@ -12,7 +12,7 @@ import pandas as pd
 from decision import scenarios
 from orbit_core.kpis import catalogue
 
-from .services import NotFound, OrbitService, _read
+from .services import NotFound, OrbitService
 
 MODEL_PURPOSE = {
     "revenue_forecast": "Six-month regional revenue forecast with 80% intervals; feeds risk, optimization and decisions.",
@@ -149,11 +149,10 @@ class InsightService:
             fut = [{"month": str(r.target_month), "horizon": int(r.horizon), "forecast": float(r.forecast),
                     "lower_80": float(r.lower_80), "upper_80": float(r.upper_80)} for r in g.itertuples()]
             band_note = "sum of regional 80% bounds (conservative: assumes regions move together)"
-        report = _read(self.out / "ml" / "model_reports.json")["revenue_forecast"]
-        test_path = self.out / "ml" / "forecast_test_predictions.parquet"
+        report = self.core.artifact("ml/model_reports.json")["revenue_forecast"]
+        t = self._forecast_test()
         backtest, region_acc = [], {}
-        if test_path.exists():
-            t = pd.read_parquet(test_path)
+        if t is not None:
             for rid, g in t.groupby("region_id"):
                 region_acc[rid] = {"mape": float((abs(g.revenue - g.prediction) / g.revenue).mean()),
                                    "naive_mape": float((abs(g.revenue - g.lag12) / g.revenue).mean()), "n": len(g)}
@@ -168,6 +167,17 @@ class InsightService:
                        "forecast": fut, "backtest": backtest, "accuracy": report["test"],
                        "accuracy_by_region": region_acc, "split": report.get("split"),
                        "features": report.get("params", {}).get("features")})
+
+    def _forecast_test(self) -> pd.DataFrame | None:
+        path = self.out / "ml" / "forecast_test_predictions.parquet"
+        if path.exists():
+            return pd.read_parquet(path)
+        rows = self.core.artifact("ml/forecast_test_predictions.json", required=False)
+        if not rows:
+            return None
+        t = pd.DataFrame(rows)
+        t["month"] = pd.to_datetime(t["month"])
+        return t
 
     # ---- risk -------------------------------------------------------------------------------
     def risk_detail(self, region_id: str) -> dict:
@@ -341,7 +351,7 @@ class InsightService:
 
     def models(self) -> dict:
         counts = self.repo.prediction_counts()
-        reports = _read(self.out / "ml" / "model_reports.json")
+        reports = self.core.artifact("ml/model_reports.json")
         out = []
         for m in self.core.models()["models"]:
             rep = reports.get(m["model_name"], {})

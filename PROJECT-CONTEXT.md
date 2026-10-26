@@ -48,7 +48,7 @@ Last updated: 2026-10-26 (Asia/Calcutta).
 
 ## Toolchain (VERIFIED versions)
 - Python 3.13.15, Java 21.0.12, Node 24.20.0, Git 2.55.0, g++ 16.2.0, rustc 1.99.1, R 4.6.1, Julia 1.11.7 (JuMP 1.32.1, HiGHS 1.26.1), Spark 4.0.4, PostgreSQL 17.7 portable, TypeScript 5.9.3.
-- Web: React 18, Vite 6.0.7, Vitest 3.0.5, Playwright (chromium build 1148 in `.tools\ms-playwright`).
+- Web: React 18, React Router 7.18.4, Vite 6.4.5, Vitest 4.1.12, Playwright 1.64.1 (chromium in `.tools\ms-playwright`).
 
 ## Gotchas
 - The `&` in the folder path breaks `.cmd` shims, so `orbit.ps1` calls the node scripts directly (npm-cli.js, vite.js, cli.js).
@@ -56,18 +56,12 @@ Last updated: 2026-10-26 (Asia/Calcutta).
 - Background servers started from a remote shell session die when that session ends. Start the API and preview in the same session as e2e.
 - npm reports that the esbuild postinstall is not approved under allowScripts. The build works anyway, because the platform binary package ships prebuilt.
 
-## Phase 3 remaining
-- Security audit:
-  - Authentication and authorization (none today)
-  - Rate limiting
-  - Dependency audit
-  - CSP headers
-- GitHub push and CI (pytest, vitest, eslint, build, Playwright). Phase 3 needs approval for this.
-- Vercel or other deployment of the web build, plus a hosted API and a hosted database. Phase 3 needs approval for this too.
-- Performance:
-  - Warm the intelligence cache at startup, or pre-aggregate transactions in the pipeline.
-  - Split the Recharts chunk.
-  - Profile overview and risks/region (about 0.5 s).
-- Add a KPI catalogue entry for the `cost` metric.
-- Manually test the BI tool guides in Tableau, Power BI and QlikView.
-- Real-data connectors. All data is a simulated enterprise dataset.
+## Phase 3 (deployment hardening)
+- Hosted architecture: one Vercel project (static SPA + `api/index.py` Python Function) + Neon Postgres. Heavy engines stay local.
+- `ORBIT_ENV` local/dev/prod; prod refuses loopback CORS/DB URLs; `DATABASE_URL` wins over discrete DB fields.
+- `artifacts` table (migration 004) holds the JSON outputs the API reads; `database/seeds/publish.py` (`orbit.ps1 publish-hosted`) copies all tables + artifacts to the hosted DB.
+- Hosted optimization run returns the latest persisted run with `mode: "persisted"` and a "runs locally" message; `/api/v1/capabilities` tells the UI.
+- `apps/api/orbit_api/security.py`: security headers, 32 KB body limit, per-instance rate limit (600/min default). No stack traces to clients.
+- `requirements.txt` = API runtime only; `requirements-dev.txt` = full workstation set.
+- Audits: gitleaks (history + tree) clean; pip-audit clean; npm audit 0 after upgrades (react-router-dom 7.18.4, vite 6.4.5, vitest 4.1.12, eslint 9.39.5, @playwright/test 1.64.1); cargo audit clean.
+- Still open: auth, global rate limiting, CI, BI manual tests, cost KPI.

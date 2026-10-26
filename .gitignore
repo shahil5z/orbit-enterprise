@@ -22,3 +22,5 @@ src_*.tar
 apps/web/test-results/
 apps/web/playwright-report/
 data/bi/
+.vercel/
+.env*.local
