@@ -156,7 +156,7 @@ The Java service exposes simulated CRM accounts and ERP suppliers and purchase o
 >
 > - 11/11 stages successful
 > - About 54 seconds end to end
-> - 467,465 rows published to PostgreSQL
+> - 467,465 rows written by the PUBLISH stage for this run (421,561 core entity rows + 45,904 run-output rows). Total persisted rows in the warehouse are higher because earlier runs' predictions, recommendations, quality results, optimization runs and stage records are kept as history.
 >
 > This is a local workstation run on the simulated dataset, not a production-scale benchmark.
 
