@@ -22,10 +22,10 @@
 </p>
 
 <p align="center">
-  <a href="https://orbit-enterprise.vercel.app"><strong>Demo Site: https://orbit-enterprise.vercel.app</strong></a>
+  <a href="https://orbit-enterprise.vercel.app">
+    <strong>Live Demo</strong>
+  </a>
 </p>
-
-<p align="center"><strong>Designed and developed by Shohrab Haque Shahil</strong></p>
 
 ---
 
@@ -403,10 +403,10 @@ orbit-enterprise/
 | API | [API](docs/api.md) |
 | BI | [BI overview](docs/bi/README.md), [Tableau](docs/bi/tableau.md), [Power BI](docs/bi/powerbi.md), [QlikView](docs/bi/qlikview.md) |
 
-## License
-
-Released under the [MIT License](LICENSE).
-
 ## Author
 
 **Designed and developed by Shohrab Haque Shahil**
+
+## License
+
+Released under the [MIT License](LICENSE).
