@@ -1,0 +1,21 @@
+# portable toolchains and local runtime state (never committed)
+.tools/
+.env
+forblog.md
+logs/
+data/raw/
+data/staging/
+data/curated/
+data/runs/
+data/outputs/
+ml/artifacts/
+**/build/
+analytics/rust/anomaly_scorer/target/
+apps/web/node_modules/
+apps/web/dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.class
+Thumbs.db
+src_*.tar

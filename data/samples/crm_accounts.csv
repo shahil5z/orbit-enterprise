@@ -1,0 +1,301 @@
+customer_id,name,region_id,segment,industry,signup_date,satisfaction_score,credit_limit
+C00001,Simulated Customer 00001,R02,SMB,Technology,2022-09-02,6.1,15200.0
+C00002,Simulated Customer 00002,R05,SMB,Manufacturing,2022-03-15,6.1,27300.0
+C00003,Simulated Customer 00003,R01,SMB,Financial Services,2022-07-09,8.5,20100.0
+C00004,Simulated Customer 00004,R02,SMB,Telecommunications,2021-08-25,4.4,22300.0
+C00005,Simulated Customer 00005,R05,SMB,Unknown,2019-03-04,7.6,27900.0
+C00006,Simulated Customer 00006,R01,Mid-Market,Retail,2021-05-15,6.2,161900.0
+C00007,Simulated Customer 00007,R01,SMB,Retail,2021-08-14,6.5,29400.0
+C00008,Simulated Customer 00008,R01,Enterprise,Technology,2019-04-12,8.8,690600.0
+C00009,Simulated Customer 00009,R01,Mid-Market,Telecommunications,2020-05-24,4.8,139800.0
+C00010,Simulated Customer 00010,R05,SMB,Public Sector,2024-09-07,8.8,28700.0
+C00011,Simulated Customer 00011,R01,Mid-Market,Financial Services,2020-03-16,8.2,97900.0
+C00012,Simulated Customer 00012,R01,SMB,Manufacturing,2019-09-15,8.2,30700.0
+C00013,Simulated Customer 00013,R02,Mid-Market,Healthcare,2023-09-30,8.4,98700.0
+C00014,Simulated Customer 00014,R02,Mid-Market,Manufacturing,2020-02-02,7.1,92800.0
+C00015,Simulated Customer 00015,R03,Mid-Market,Financial Services,2023-09-18,8.4,142900.0
+C00016,Simulated Customer 00016,R03,Mid-Market,Telecommunications,2024-04-11,8.8,81100.0
+C00017,Simulated Customer 00017,R01,Enterprise,Telecommunications,2021-10-11,8.1,400700.0
+C00018,Simulated Customer 00018,R05,Mid-Market,Manufacturing,2021-01-01,4.3,117000.0
+C00019,Simulated Customer 00019,R01,Enterprise,Public Sector,2019-07-08,6.9,676600.0
+C00020,Simulated Customer 00020,R01,SMB,Energy,2022-12-01,7.8,32600.0
+C00021,Simulated Customer 00021,R02,SMB,Healthcare,2021-04-14,6.7,32200.0
+C00022,Simulated Customer 00022,R02,SMB,Manufacturing,2020-04-26,7.6,20100.0
+C00023,Simulated Customer 00023,R06,SMB,Energy,2021-02-24,5.7,22500.0
+C00024,Simulated Customer 00024,R05,SMB,Public Sector,2021-08-20,8.2,15200.0
+C00025,Simulated Customer 00025,R05,Mid-Market,Public Sector,2020-07-24,6.5,83300.0
+C00026,Simulated Customer 00026,R03,Enterprise,Telecommunications,2024-09-07,6.7,531900.0
+C00027,Simulated Customer 00027,R06,Mid-Market,Financial Services,2023-08-30,6.0,125700.0
+C00028,Simulated Customer 00028,R05,Mid-Market,Financial Services,2020-09-18,8.5,87200.0
+C00029,Simulated Customer 00029,R05,SMB,Public Sector,2024-09-17,5.6,20200.0
+C00030,Simulated Customer 00030,R03,Mid-Market,Unknown,2023-03-19,4.0,96700.0
+C00031,Simulated Customer 00031,R01,Enterprise,Financial Services,2024-08-25,8.9,654200.0
+C00032,Simulated Customer 00032,R03,Mid-Market,Healthcare,2021-06-04,5.5,87000.0
+C00033,Simulated Customer 00033,R04,Mid-Market,Manufacturing,2018-11-30,7.1,81000.0
+C00034,Simulated Customer 00034,R06,SMB,Technology,2020-06-11,6.0,20100.0
+C00035,Simulated Customer 00035,R02,SMB,Healthcare,2022-08-05,8.7,18200.0
+C00036,Simulated Customer 00036,R05,Enterprise,Healthcare,2023-06-05,6.8,680000.0
+C00037,Simulated Customer 00037,R02,Enterprise,Technology,2019-04-19,7.9,690700.0
+C00038,Simulated Customer 00038,R02,SMB,Manufacturing,2024-10-29,7.6,31500.0
+C00039,Simulated Customer 00039,R04,Mid-Market,Financial Services,2024-09-10,8.8,77900.0
+C00040,Simulated Customer 00040,R04,SMB,Manufacturing,2020-01-20,5.4,29700.0
+C00041,Simulated Customer 00041,R02,Mid-Market,Financial Services,2023-04-24,5.9,81900.0
+C00042,Simulated Customer 00042,R01,Mid-Market,Healthcare,2022-04-04,6.7,130900.0
+C00043,Simulated Customer 00043,R04,SMB,Technology,2020-08-24,5.8,32800.0
+C00044,Simulated Customer 00044,R02,SMB,Manufacturing,2024-03-31,6.2,34800.0
+C00045,Simulated Customer 00045,R01,SMB,Manufacturing,2023-06-10,7.2,20400.0
+C00046,Simulated Customer 00046,R04,SMB,Public Sector,2020-06-30,10.0,29000.0
+C00047,Simulated Customer 00047,R02,SMB,Retail,2020-01-19,5.2,24200.0
+C00048,Simulated Customer 00048,R02,Mid-Market,Energy,2021-02-23,6.9,138200.0
+C00049,Simulated Customer 00049,R02,SMB,Retail,2019-02-04,7.7,15600.0
+C00050,Simulated Customer 00050,R06,Mid-Market,Technology,2019-06-04,6.7,104900.0
+C00051,Simulated Customer 00051,R03,SMB,Retail,2023-05-15,9.0,33900.0
+C00052,Simulated Customer 00052,R02,SMB,Manufacturing,2024-08-22,8.0,17000.0
+C00053,Simulated Customer 00053,R01,Mid-Market,Telecommunications,2020-08-16,10.0,147800.0
+C00054,Simulated Customer 00054,R04,Mid-Market,Energy,2020-11-03,7.6,73900.0
+C00055,Simulated Customer 00055,R01,Mid-Market,Retail,2024-03-02,8.7,93400.0
+C00056,Simulated Customer 00056,R03,Mid-Market,Unknown,2018-11-29,8.7,114300.0
+C00057,Simulated Customer 00057,R02,SMB,Healthcare,2020-04-19,6.3,30000.0
+C00058,Simulated Customer 00058,R03,SMB,Retail,2021-01-18,7.7,21200.0
+C00059,Simulated Customer 00059,R03,Mid-Market,Public Sector,2021-11-08,8.2,107100.0
+C00060,Simulated Customer 00060,R04,SMB,Manufacturing,2019-12-18,5.3,32200.0
+C00061,Simulated Customer 00061,R03,Mid-Market,Manufacturing,2021-12-05,6.4,115100.0
+C00062,Simulated Customer 00062,R03,SMB,Unknown,2019-10-23,6.9,22000.0
+C00063,Simulated Customer 00063,R02,Mid-Market,Financial Services,2024-10-21,8.5,101800.0
+C00064,Simulated Customer 00064,R02,Mid-Market,Public Sector,2020-02-25,7.1,157700.0
+C00065,Simulated Customer 00065,R01,SMB,Public Sector,2021-05-15,7.2,18700.0
+C00066,Simulated Customer 00066,R02,Mid-Market,Telecommunications,2019-01-26,9.6,109400.0
+C00067,Simulated Customer 00067,R05,SMB,Energy,2019-05-15,6.1,15300.0
+C00068,Simulated Customer 00068,R05,SMB,Manufacturing,2023-07-15,7.8,16000.0
+C00069,Simulated Customer 00069,R05,Enterprise,Telecommunications,2022-09-19,7.8,691300.0
+C00070,Simulated Customer 00070,R02,Mid-Market,Financial Services,2019-12-16,10.0,126800.0
+C00071,Simulated Customer 00071,R06,Mid-Market,Technology,2023-11-28,6.0,92500.0
+C00072,Simulated Customer 00072,R01,Mid-Market,Healthcare,2022-05-28,5.5,89100.0
+C00073,Simulated Customer 00073,R02,Mid-Market,Unknown,2021-09-01,10.0,93300.0
+C00074,Simulated Customer 00074,R01,Mid-Market,Manufacturing,2018-12-27,6.4,99200.0
+C00075,Simulated Customer 00075,R06,SMB,Energy,2022-01-06,5.9,15200.0
+C00076,Simulated Customer 00076,R01,SMB,Healthcare,2020-11-13,6.7,25900.0
+C00077,Simulated Customer 00077,R01,Mid-Market,Manufacturing,2021-04-27,8.8,87900.0
+C00078,Simulated Customer 00078,R02,SMB,Manufacturing,2019-06-05,6.2,23800.0
+C00079,Simulated Customer 00079,R02,Mid-Market,Financial Services,2023-04-09,7.9,141400.0
+C00080,Simulated Customer 00080,R01,Enterprise,Technology,2022-11-27,8.3,401600.0
+C00081,Simulated Customer 00081,R01,Mid-Market,Public Sector,2020-07-29,6.6,123100.0
+C00082,Simulated Customer 00082,R04,Mid-Market,Manufacturing,2022-10-08,8.9,162400.0
+C00083,Simulated Customer 00083,R04,SMB,Financial Services,2018-12-01,6.6,15500.0
+C00084,Simulated Customer 00084,R05,SMB,Retail,2022-05-06,9.5,18000.0
+C00085,Simulated Customer 00085,R06,Enterprise,Retail,2022-02-27,4.2,354400.0
+C00086,Simulated Customer 00086,R02,SMB,Energy,2020-10-25,5.7,26300.0
+C00087,Simulated Customer 00087,R02,SMB,Retail,2023-02-24,5.6,22000.0
+C00088,Simulated Customer 00088,R03,Enterprise,Technology,2020-11-18,6.8,599300.0
+C00089,Simulated Customer 00089,R03,Mid-Market,Energy,2020-05-21,9.2,86500.0
+C00090,Simulated Customer 00090,R06,Mid-Market,Healthcare,2020-06-18,9.4,128600.0
+C00091,Simulated Customer 00091,R03,SMB,Retail,2021-02-19,5.0,21400.0
+C00092,Simulated Customer 00092,R03,Mid-Market,Telecommunications,2019-01-17,7.3,100800.0
+C00093,Simulated Customer 00093,R01,Enterprise,Retail,2024-07-02,7.9,604300.0
+C00094,Simulated Customer 00094,R02,SMB,Financial Services,2023-05-08,10.0,28300.0
+C00095,Simulated Customer 00095,R06,Mid-Market,Financial Services,2020-09-17,10.0,126600.0
+C00096,Simulated Customer 00096,R01,Mid-Market,Healthcare,2020-11-15,5.7,111500.0
+C00097,Simulated Customer 00097,R05,Enterprise,Public Sector,2020-01-21,7.0,507400.0
+C00098,Simulated Customer 00098,R05,Enterprise,Telecommunications,2020-01-09,8.9,444100.0
+C00099,Simulated Customer 00099,R01,SMB,Healthcare,2020-03-07,3.5,32900.0
+C00100,Simulated Customer 00100,R05,SMB,Manufacturing,2019-08-09,8.7,15700.0
+C00101,Simulated Customer 00101,R01,SMB,Retail,2022-04-01,6.7,20200.0
+C00102,Simulated Customer 00102,R02,SMB,Energy,2024-02-04,7.1,27800.0
+C00103,Simulated Customer 00103,R03,Mid-Market,Unknown,2022-01-07,7.7,81000.0
+C00104,Simulated Customer 00104,R02,Mid-Market,Healthcare,2021-09-11,5.2,129700.0
+C00105,Simulated Customer 00105,R02,Mid-Market,Healthcare,2020-12-14,7.7,97600.0
+C00106,Simulated Customer 00106,R03,Mid-Market,Energy,2021-03-05,7.4,151700.0
+C00107,Simulated Customer 00107,R03,Mid-Market,Financial Services,2021-01-12,7.5,153600.0
+C00108,Simulated Customer 00108,R03,SMB,Public Sector,2021-08-04,6.1,20600.0
+C00109,Simulated Customer 00109,R01,Enterprise,Telecommunications,2024-02-28,7.6,542300.0
+C00110,Simulated Customer 00110,R02,Mid-Market,Public Sector,2022-07-26,6.1,73600.0
+C00111,Simulated Customer 00111,R03,Enterprise,Public Sector,2021-08-05,4.7,583500.0
+C00112,Simulated Customer 00112,R01,SMB,Healthcare,2019-03-31,6.0,25000.0
+C00113,Simulated Customer 00113,R02,SMB,Public Sector,2020-08-31,7.4,15800.0
+C00114,Simulated Customer 00114,R04,Enterprise,Telecommunications,2020-03-20,5.6,506900.0
+C00115,Simulated Customer 00115,R06,SMB,Telecommunications,2024-08-28,7.3,23900.0
+C00116,Simulated Customer 00116,R01,SMB,Public Sector,2023-11-05,8.4,22500.0
+C00117,Simulated Customer 00117,R03,Enterprise,Manufacturing,2019-01-30,9.9,672800.0
+C00118,Simulated Customer 00118,R06,Mid-Market,Financial Services,2019-06-15,6.0,116600.0
+C00119,Simulated Customer 00119,R02,SMB,Public Sector,2019-05-02,8.1,29800.0
+C00120,Simulated Customer 00120,R01,SMB,Public Sector,2019-03-20,8.0,25600.0
+C00121,Simulated Customer 00121,R06,SMB,Energy,2021-01-16,7.7,19300.0
+C00122,Simulated Customer 00122,R04,Mid-Market,Financial Services,2022-08-29,6.9,82100.0
+C00123,Simulated Customer 00123,R01,Mid-Market,Public Sector,2020-05-24,7.0,74500.0
+C00124,Simulated Customer 00124,R01,Mid-Market,Public Sector,2022-10-03,9.0,116700.0
+C00125,Simulated Customer 00125,R04,SMB,Healthcare,2019-05-20,9.0,25100.0
+C00126,Simulated Customer 00126,R01,Mid-Market,Public Sector,2023-02-16,8.5,107200.0
+C00127,Simulated Customer 00127,R05,Enterprise,Retail,2023-08-20,6.7,446600.0
+C00128,Simulated Customer 00128,R03,SMB,Public Sector,2022-05-29,6.4,16300.0
+C00129,Simulated Customer 00129,R06,SMB,Healthcare,2019-08-17,4.4,32600.0
+C00130,Simulated Customer 00130,R01,SMB,Public Sector,2022-12-18,6.0,33200.0
+C00131,Simulated Customer 00131,R05,Mid-Market,Public Sector,2020-12-27,7.6,81500.0
+C00132,Simulated Customer 00132,R01,SMB,Telecommunications,2021-04-13,7.3,34200.0
+C00133,Simulated Customer 00133,R03,SMB,Unknown,2021-06-01,4.5,29700.0
+C00134,Simulated Customer 00134,R01,SMB,Retail,2018-12-11,8.5,23300.0
+C00135,Simulated Customer 00135,R02,Enterprise,Technology,2024-06-16,5.5,565300.0
+C00136,Simulated Customer 00136,R04,SMB,Financial Services,2021-05-21,6.0,24800.0
+C00137,Simulated Customer 00137,R03,Mid-Market,Telecommunications,2019-02-01,6.6,137000.0
+C00138,Simulated Customer 00138,R03,Mid-Market,Retail,2023-05-05,8.0,147600.0
+C00139,Simulated Customer 00139,R01,Mid-Market,Healthcare,2021-09-11,6.5,133800.0
+C00140,Simulated Customer 00140,R05,Mid-Market,Telecommunications,2019-09-06,7.2,143900.0
+C00141,Simulated Customer 00141,R06,SMB,Public Sector,2020-04-14,10.0,21200.0
+C00142,Simulated Customer 00142,R05,SMB,Financial Services,2024-08-26,6.7,34500.0
+C00143,Simulated Customer 00143,R05,SMB,Telecommunications,2022-01-14,6.2,24100.0
+C00144,Simulated Customer 00144,R06,SMB,Retail,2021-05-11,8.1,18500.0
+C00145,Simulated Customer 00145,R02,Mid-Market,Energy,2020-08-03,8.4,93500.0
+C00146,Simulated Customer 00146,R02,SMB,Energy,2024-05-02,4.0,31700.0
+C00147,Simulated Customer 00147,R05,SMB,Telecommunications,2020-10-17,9.7,30200.0
+C00148,Simulated Customer 00148,R02,SMB,Financial Services,2020-11-10,4.7,20200.0
+C00149,Simulated Customer 00149,R01,SMB,Healthcare,2019-04-10,8.9,31100.0
+C00150,Simulated Customer 00150,R04,Enterprise,Financial Services,2024-10-18,9.2,395500.0
+C00151,Simulated Customer 00151,R02,SMB,Technology,2018-12-10,8.7,25800.0
+C00152,Simulated Customer 00152,R01,SMB,Energy,2023-08-12,8.0,15000.0
+C00153,Simulated Customer 00153,R01,Mid-Market,Healthcare,2020-01-05,6.6,87500.0
+C00154,Simulated Customer 00154,R03,SMB,Retail,2020-08-23,4.2,18500.0
+C00155,Simulated Customer 00155,R02,Mid-Market,Financial Services,2019-10-02,9.4,104800.0
+C00156,Simulated Customer 00156,R04,Mid-Market,Technology,2022-06-09,6.5,121900.0
+C00157,Simulated Customer 00157,R05,Enterprise,Retail,2020-10-17,8.5,575900.0
+C00158,Simulated Customer 00158,R06,Mid-Market,Unknown,2022-12-03,7.1,107600.0
+C00159,Simulated Customer 00159,R05,SMB,Public Sector,2020-01-06,5.5,30500.0
+C00160,Simulated Customer 00160,R02,SMB,Telecommunications,2022-04-04,9.0,28000.0
+C00161,Simulated Customer 00161,R02,SMB,Public Sector,2019-07-27,6.5,29200.0
+C00162,Simulated Customer 00162,R03,SMB,Manufacturing,2024-05-12,7.1,28100.0
+C00163,Simulated Customer 00163,R06,Mid-Market,Manufacturing,2019-06-17,6.7,88700.0
+C00164,Simulated Customer 00164,R05,SMB,Manufacturing,2022-11-29,6.9,25600.0
+C00165,Simulated Customer 00165,R03,SMB,Healthcare,2022-02-27,5.8,31400.0
+C00166,Simulated Customer 00166,R05,Mid-Market,Energy,2019-05-10,8.0,103600.0
+C00167,Simulated Customer 00167,R05,SMB,Technology,2021-05-04,7.2,29900.0
+C00168,Simulated Customer 00168,R03,SMB,Manufacturing,2020-12-08,6.0,22800.0
+C00169,Simulated Customer 00169,R02,SMB,Energy,2021-07-28,6.9,22400.0
+C00170,Simulated Customer 00170,R05,Mid-Market,Manufacturing,2019-06-20,7.8,130400.0
+C00171,Simulated Customer 00171,R04,SMB,Financial Services,2021-11-25,4.3,29900.0
+C00172,Simulated Customer 00172,R01,Mid-Market,Retail,2022-07-24,6.0,81800.0
+C00173,Simulated Customer 00173,R06,Mid-Market,Unknown,2019-03-27,7.4,114000.0
+C00174,Simulated Customer 00174,R01,SMB,Manufacturing,2020-08-09,7.2,27300.0
+C00175,Simulated Customer 00175,R04,SMB,Healthcare,2024-06-09,8.0,20800.0
+C00176,Simulated Customer 00176,R03,SMB,Technology,2020-06-02,4.5,31000.0
+C00177,Simulated Customer 00177,R03,Mid-Market,Healthcare,2019-11-04,8.7,73000.0
+C00178,Simulated Customer 00178,R03,Enterprise,Public Sector,2021-04-17,6.6,572000.0
+C00179,Simulated Customer 00179,R02,Mid-Market,Energy,2019-04-24,6.7,154200.0
+C00180,Simulated Customer 00180,R01,Enterprise,Energy,2023-06-17,8.8,360900.0
+C00181,Simulated Customer 00181,R06,Mid-Market,Financial Services,2020-10-09,6.8,131000.0
+C00182,Simulated Customer 00182,R05,SMB,Financial Services,2022-08-22,8.4,20200.0
+C00183,Simulated Customer 00183,R04,Enterprise,Public Sector,2020-08-01,7.1,499400.0
+C00184,Simulated Customer 00184,R03,SMB,Public Sector,2021-02-28,7.0,16300.0
+C00185,Simulated Customer 00185,R02,Mid-Market,Retail,2022-03-27,6.0,123300.0
+C00186,Simulated Customer 00186,R06,Enterprise,Financial Services,2023-01-23,10.0,351200.0
+C00187,Simulated Customer 00187,R04,Mid-Market,Retail,2021-01-12,8.6,110400.0
+C00188,Simulated Customer 00188,R01,Enterprise,Energy,2023-12-07,5.6,460000.0
+C00189,Simulated Customer 00189,R03,SMB,Retail,2021-03-30,5.8,16200.0
+C00190,Simulated Customer 00190,R01,Mid-Market,Telecommunications,2020-02-03,6.8,136500.0
+C00191,Simulated Customer 00191,R05,Mid-Market,Healthcare,2023-01-01,9.4,128600.0
+C00192,Simulated Customer 00192,R03,Mid-Market,Financial Services,2019-01-04,5.4,94400.0
+C00193,Simulated Customer 00193,R05,Enterprise,Public Sector,2020-08-15,4.7,558200.0
+C00194,Simulated Customer 00194,R02,SMB,Telecommunications,2021-04-21,6.2,27400.0
+C00195,Simulated Customer 00195,R01,SMB,Retail,2021-05-08,8.4,20200.0
+C00196,Simulated Customer 00196,R01,SMB,Healthcare,2020-11-12,7.1,16800.0
+C00197,Simulated Customer 00197,R05,SMB,Technology,2022-02-03,9.6,34600.0
+C00198,Simulated Customer 00198,R03,SMB,Telecommunications,2019-11-16,10.0,33800.0
+C00199,Simulated Customer 00199,R05,SMB,Energy,2023-09-14,7.7,33700.0
+C00200,Simulated Customer 00200,R02,Mid-Market,Unknown,2020-06-15,5.3,80100.0
+C00201,Simulated Customer 00201,R06,Mid-Market,Manufacturing,2020-03-29,7.3,102300.0
+C00202,Simulated Customer 00202,R01,Enterprise,Financial Services,2019-08-29,7.5,674300.0
+C00203,Simulated Customer 00203,R02,Enterprise,Healthcare,2022-12-06,6.3,652400.0
+C00204,Simulated Customer 00204,R03,SMB,Retail,2021-07-29,7.1,30300.0
+C00205,Simulated Customer 00205,R06,SMB,Manufacturing,2018-11-24,6.2,30500.0
+C00206,Simulated Customer 00206,R02,Enterprise,Energy,2020-03-03,5.0,320900.0
+C00207,Simulated Customer 00207,R05,SMB,Technology,2021-05-03,5.0,33000.0
+C00208,Simulated Customer 00208,R05,SMB,Retail,2023-09-02,10.0,20000.0
+C00209,Simulated Customer 00209,R05,Enterprise,Manufacturing,2019-12-03,5.1,393500.0
+C00210,Simulated Customer 00210,R05,SMB,Energy,2022-12-22,8.9,30300.0
+C00211,Simulated Customer 00211,R03,Mid-Market,Retail,2024-05-31,6.7,123800.0
+C00212,Simulated Customer 00212,R03,SMB,Retail,2019-12-16,6.4,29200.0
+C00213,Simulated Customer 00213,R06,Mid-Market,Healthcare,2019-07-12,7.4,104400.0
+C00214,Simulated Customer 00214,R02,Mid-Market,Technology,2023-12-11,6.9,141900.0
+C00215,Simulated Customer 00215,R05,SMB,Financial Services,2020-03-24,7.2,17800.0
+C00216,Simulated Customer 00216,R02,Mid-Market,Public Sector,2021-08-26,7.3,103400.0
+C00217,Simulated Customer 00217,R01,Mid-Market,Retail,2021-11-01,6.8,73400.0
+C00218,Simulated Customer 00218,R05,Enterprise,Healthcare,2019-12-25,9.7,657600.0
+C00219,Simulated Customer 00219,R03,Enterprise,Technology,2024-04-24,5.0,505900.0
+C00220,Simulated Customer 00220,R04,SMB,Telecommunications,2024-10-01,6.3,27300.0
+C00221,Simulated Customer 00221,R02,Mid-Market,Energy,2022-06-28,9.1,114500.0
+C00222,Simulated Customer 00222,R01,Mid-Market,Energy,2020-07-05,7.6,113000.0
+C00223,Simulated Customer 00223,R01,Mid-Market,Public Sector,2022-12-16,7.0,143000.0
+C00224,Simulated Customer 00224,R06,SMB,Manufacturing,2021-01-01,9.6,17000.0
+C00225,Simulated Customer 00225,R06,SMB,Manufacturing,2020-02-16,8.0,31800.0
+C00226,Simulated Customer 00226,R03,Mid-Market,Healthcare,2023-12-23,7.7,90900.0
+C00227,Simulated Customer 00227,R01,Enterprise,Manufacturing,2020-08-04,6.6,519700.0
+C00228,Simulated Customer 00228,R05,SMB,Public Sector,2019-06-03,9.0,33900.0
+C00229,Simulated Customer 00229,R01,SMB,Unknown,2020-09-08,5.7,16600.0
+C00230,Simulated Customer 00230,R05,Enterprise,Manufacturing,2021-06-15,7.6,601800.0
+C00231,Simulated Customer 00231,R01,Mid-Market,Energy,2020-08-25,6.9,144900.0
+C00232,Simulated Customer 00232,R01,SMB,Manufacturing,2021-01-03,6.7,29800.0
+C00233,Simulated Customer 00233,R06,SMB,Technology,2018-11-26,7.5,25800.0
+C00234,Simulated Customer 00234,R02,Enterprise,Public Sector,2020-08-21,8.0,380400.0
+C00235,Simulated Customer 00235,R05,Mid-Market,Telecommunications,2020-04-21,6.6,123100.0
+C00236,Simulated Customer 00236,R05,Mid-Market,Telecommunications,2020-12-21,6.2,139600.0
+C00237,Simulated Customer 00237,R02,SMB,Telecommunications,2019-08-21,7.8,28600.0
+C00238,Simulated Customer 00238,R01,Mid-Market,Unknown,2020-04-18,8.3,107300.0
+C00239,Simulated Customer 00239,R03,SMB,Healthcare,2019-10-10,9.0,27400.0
+C00240,Simulated Customer 00240,R06,SMB,Energy,2021-06-20,10.0,23400.0
+C00241,Simulated Customer 00241,R02,SMB,Technology,2021-09-19,7.0,30900.0
+C00242,Simulated Customer 00242,R02,Mid-Market,Energy,2023-09-05,4.8,133000.0
+C00243,Simulated Customer 00243,R05,Mid-Market,Retail,2021-07-19,6.7,166300.0
+C00244,Simulated Customer 00244,R02,SMB,Retail,2019-02-10,6.2,29100.0
+C00245,Simulated Customer 00245,R02,SMB,Telecommunications,2020-12-10,6.5,25900.0
+C00246,Simulated Customer 00246,R01,Mid-Market,Unknown,2024-05-05,7.9,162100.0
+C00247,Simulated Customer 00247,R05,SMB,Financial Services,2023-09-27,8.0,23400.0
+C00248,Simulated Customer 00248,R04,SMB,Telecommunications,2020-10-28,10.0,32700.0
+C00249,Simulated Customer 00249,R01,Enterprise,Manufacturing,2021-03-17,7.1,545800.0
+C00250,Simulated Customer 00250,R06,Enterprise,Retail,2022-09-16,7.8,342900.0
+C00251,Simulated Customer 00251,R03,SMB,Technology,2022-07-17,9.0,18400.0
+C00252,Simulated Customer 00252,R01,SMB,Manufacturing,2023-10-02,5.9,30300.0
+C00253,Simulated Customer 00253,R02,SMB,Manufacturing,2021-01-06,10.0,23600.0
+C00254,Simulated Customer 00254,R06,Mid-Market,Retail,2020-08-08,4.5,117600.0
+C00255,Simulated Customer 00255,R03,SMB,Unknown,2024-03-25,3.6,34200.0
+C00256,Simulated Customer 00256,R02,Mid-Market,Financial Services,2019-06-12,5.1,138800.0
+C00257,Simulated Customer 00257,R05,Mid-Market,Healthcare,2020-05-21,5.7,139300.0
+C00258,Simulated Customer 00258,R01,SMB,Public Sector,2023-06-27,8.6,20200.0
+C00259,Simulated Customer 00259,R01,Enterprise,Retail,2020-02-05,6.5,429200.0
+C00260,Simulated Customer 00260,R04,SMB,Public Sector,2020-12-11,8.2,28400.0
+C00261,Simulated Customer 00261,R03,Enterprise,Manufacturing,2023-01-28,8.9,465000.0
+C00262,Simulated Customer 00262,R01,SMB,Financial Services,2021-11-08,5.0,29600.0
+C00263,Simulated Customer 00263,R03,Mid-Market,Manufacturing,2021-09-17,6.1,86600.0
+C00264,Simulated Customer 00264,R05,Mid-Market,Financial Services,2020-12-16,5.8,73100.0
+C00265,Simulated Customer 00265,R05,Mid-Market,Retail,2020-04-13,9.6,80700.0
+C00266,Simulated Customer 00266,R01,Mid-Market,Healthcare,2022-07-23,6.2,103300.0
+C00267,Simulated Customer 00267,R02,SMB,Technology,2024-10-10,5.5,16800.0
+C00268,Simulated Customer 00268,R03,SMB,Financial Services,2022-11-13,6.6,25100.0
+C00269,Simulated Customer 00269,R04,SMB,Technology,2020-01-06,8.6,19000.0
+C00270,Simulated Customer 00270,R04,SMB,Energy,2023-01-10,5.7,24500.0
+C00271,Simulated Customer 00271,R06,SMB,Financial Services,2021-10-01,7.2,33600.0
+C00272,Simulated Customer 00272,R05,Mid-Market,Retail,2024-06-26,8.0,81000.0
+C00273,Simulated Customer 00273,R03,Mid-Market,Financial Services,2022-12-08,6.8,83300.0
+C00274,Simulated Customer 00274,R03,Enterprise,Manufacturing,2023-06-02,7.6,397800.0
+C00275,Simulated Customer 00275,R06,SMB,Energy,2022-02-05,8.1,20500.0
+C00276,Simulated Customer 00276,R01,Mid-Market,Manufacturing,2019-11-03,7.1,158100.0
+C00277,Simulated Customer 00277,R03,SMB,Energy,2021-03-21,6.9,22600.0
+C00278,Simulated Customer 00278,R06,Mid-Market,Public Sector,2024-01-02,6.3,161200.0
+C00279,Simulated Customer 00279,R02,Mid-Market,Healthcare,2019-09-30,7.8,105000.0
+C00280,Simulated Customer 00280,R05,Mid-Market,Public Sector,2021-02-13,7.1,112900.0
+C00281,Simulated Customer 00281,R02,Mid-Market,Manufacturing,2019-01-23,7.9,148400.0
+C00282,Simulated Customer 00282,R03,SMB,Financial Services,2022-08-11,8.1,25100.0
+C00283,Simulated Customer 00283,R02,Mid-Market,Financial Services,2019-11-12,6.9,89800.0
+C00284,Simulated Customer 00284,R01,Mid-Market,Public Sector,2022-06-20,5.7,81600.0
+C00285,Simulated Customer 00285,R01,SMB,Energy,2024-03-23,7.8,21600.0
+C00286,Simulated Customer 00286,R03,SMB,Energy,2019-06-04,7.8,27900.0
+C00287,Simulated Customer 00287,R04,Mid-Market,Energy,2020-03-05,8.8,90200.0
+C00288,Simulated Customer 00288,R01,SMB,Telecommunications,2021-06-05,9.5,27100.0
+C00289,Simulated Customer 00289,R03,Mid-Market,Telecommunications,2021-08-17,7.1,122200.0
+C00290,Simulated Customer 00290,R01,SMB,Public Sector,2023-02-09,7.9,23000.0
+C00291,Simulated Customer 00291,R06,SMB,Manufacturing,2023-04-07,8.8,17900.0
+C00292,Simulated Customer 00292,R02,Mid-Market,Healthcare,2019-12-16,6.8,133800.0
+C00293,Simulated Customer 00293,R02,SMB,Financial Services,2019-01-03,7.4,18800.0
+C00294,Simulated Customer 00294,R03,Mid-Market,Retail,2018-12-09,8.6,146000.0
+C00295,Simulated Customer 00295,R06,Mid-Market,Energy,2019-12-26,7.9,148700.0
+C00296,Simulated Customer 00296,R02,Mid-Market,Financial Services,2024-06-26,8.5,154200.0
+C00297,Simulated Customer 00297,R04,Mid-Market,Telecommunications,2019-11-12,7.9,80900.0
+C00298,Simulated Customer 00298,R01,SMB,Energy,2021-11-08,8.3,23600.0
+C00299,Simulated Customer 00299,R05,Enterprise,Public Sector,2023-08-15,5.6,396700.0
+C00300,Simulated Customer 00300,R01,Mid-Market,Public Sector,2023-02-08,7.2,145700.0

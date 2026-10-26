@@ -1,0 +1,400 @@
+{
+ "schema_version": "1.0",
+ "datasets": {
+  "organizations": {
+   "path": "organizations.json",
+   "format": "json",
+   "primary_key": "org_id",
+   "schema": {
+    "org_id": "string",
+    "name": "string",
+    "parent_org_id": "string",
+    "country": "string"
+   },
+   "required": [
+    "org_id",
+    "name"
+   ],
+   "nullable": [
+    "parent_org_id"
+   ]
+  },
+  "regions": {
+   "path": "regions.csv",
+   "format": "csv",
+   "primary_key": "region_id",
+   "schema": {
+    "region_id": "string",
+    "name": "string",
+    "currency": "string"
+   },
+   "required": [
+    "region_id",
+    "name"
+   ]
+  },
+  "business_units": {
+   "path": "business_units.csv",
+   "format": "csv",
+   "primary_key": "bu_id",
+   "schema": {
+    "bu_id": "string",
+    "org_id": "string",
+    "name": "string"
+   },
+   "required": [
+    "bu_id",
+    "org_id",
+    "name"
+   ],
+   "foreign_keys": {
+    "org_id": "organizations.org_id"
+   }
+  },
+  "products": {
+   "path": "products.json",
+   "format": "json_envelope",
+   "records_key": "items",
+   "primary_key": "product_id",
+   "schema": {
+    "product_id": "string",
+    "bu_id": "string",
+    "name": "string",
+    "category": "category",
+    "unit_price": "float",
+    "unit_cost": "float"
+   },
+   "required": [
+    "product_id",
+    "bu_id",
+    "unit_price"
+   ],
+   "foreign_keys": {
+    "bu_id": "business_units.bu_id"
+   },
+   "ranges": {
+    "unit_price": [
+     0,
+     1000000
+    ],
+    "unit_cost": [
+     0,
+     1000000
+    ]
+   },
+   "categories": {
+    "category": [
+     "Cloud",
+     "Software",
+     "Hardware",
+     "Consulting",
+     "Support"
+    ]
+   }
+  },
+  "customers": {
+   "path": "customers.csv",
+   "format": "csv",
+   "primary_key": "customer_id",
+   "schema": {
+    "customer_id": "string",
+    "name": "string",
+    "region_id": "string",
+    "segment": "category",
+    "industry": "category",
+    "signup_date": "date",
+    "satisfaction_score": "float",
+    "credit_limit": "float"
+   },
+   "required": [
+    "customer_id",
+    "region_id",
+    "segment"
+   ],
+   "foreign_keys": {
+    "region_id": "regions.region_id"
+   },
+   "ranges": {
+    "satisfaction_score": [
+     1,
+     10
+    ],
+    "credit_limit": [
+     0,
+     10000000
+    ]
+   },
+   "date_bounds": {
+    "signup_date": [
+     "2015-01-01",
+     "2026-12-31"
+    ]
+   },
+   "categories": {
+    "segment": [
+     "Enterprise",
+     "Mid-Market",
+     "SMB"
+    ]
+   }
+  },
+  "transactions": {
+   "path": "transactions.parquet",
+   "format": "parquet",
+   "primary_key": "transaction_id",
+   "schema": {
+    "transaction_id": "string",
+    "customer_id": "string",
+    "region_id": "string",
+    "product_id": "string",
+    "bu_id": "string",
+    "txn_date": "date",
+    "quantity": "int",
+    "unit_price": "float",
+    "discount_pct": "float",
+    "revenue": "float",
+    "cost": "float",
+    "channel": "category"
+   },
+   "required": [
+    "transaction_id",
+    "customer_id",
+    "product_id",
+    "txn_date",
+    "revenue"
+   ],
+   "foreign_keys": {
+    "customer_id": "customers.customer_id",
+    "product_id": "products.product_id",
+    "region_id": "regions.region_id",
+    "bu_id": "business_units.bu_id"
+   },
+   "ranges": {
+    "quantity": [
+     1,
+     10000
+    ],
+    "discount_pct": [
+     0,
+     0.6
+    ],
+    "revenue": [
+     0,
+     100000000
+    ],
+    "cost": [
+     0,
+     100000000
+    ]
+   },
+   "date_bounds": {
+    "txn_date": [
+     "2023-01-01",
+     "2025-12-31"
+    ]
+   },
+   "categories": {
+    "channel": [
+     "direct",
+     "partner",
+     "online"
+    ]
+   },
+   "derived_checks": [
+    {
+     "column": "revenue",
+     "expression": "quantity * unit_price * (1 - discount_pct)",
+     "rel_tolerance": 0.01
+    }
+   ]
+  },
+  "operations": {
+   "path": "operations.csv",
+   "format": "csv",
+   "primary_key": "operation_id",
+   "schema": {
+    "operation_id": "string",
+    "op_date": "date",
+    "region_id": "string",
+    "bu_id": "string",
+    "headcount": "float",
+    "orders_processed": "int",
+    "fulfillment_hours": "float",
+    "uptime_pct": "float",
+    "support_tickets": "int",
+    "marketing_spend": "float",
+    "opex": "float"
+   },
+   "required": [
+    "operation_id",
+    "op_date",
+    "region_id",
+    "bu_id"
+   ],
+   "foreign_keys": {
+    "region_id": "regions.region_id",
+    "bu_id": "business_units.bu_id"
+   },
+   "ranges": {
+    "uptime_pct": [
+     0,
+     100
+    ],
+    "headcount": [
+     0,
+     100000
+    ]
+   },
+   "date_bounds": {
+    "op_date": [
+     "2023-01-01",
+     "2025-12-31"
+    ]
+   },
+   "outlier_columns": [
+    "opex",
+    "fulfillment_hours",
+    "support_tickets"
+   ]
+  },
+  "employees": {
+   "path": "db_extract/employees.psv",
+   "format": "db_extract",
+   "primary_key": "employee_id",
+   "schema": {
+    "employee_id": "string",
+    "bu_id": "string",
+    "region_id": "string",
+    "role": "category",
+    "hire_date": "date",
+    "annual_salary": "float",
+    "performance_rating": "int",
+    "is_active": "bool"
+   },
+   "required": [
+    "employee_id",
+    "bu_id",
+    "region_id"
+   ],
+   "foreign_keys": {
+    "bu_id": "business_units.bu_id",
+    "region_id": "regions.region_id"
+   },
+   "ranges": {
+    "annual_salary": [
+     1,
+     2000000
+    ],
+    "performance_rating": [
+     1,
+     5
+    ]
+   }
+  },
+  "suppliers": {
+   "path": "db_extract/suppliers.psv",
+   "format": "db_extract",
+   "primary_key": "supplier_id",
+   "schema": {
+    "supplier_id": "string",
+    "name": "string",
+    "region_id": "string",
+    "category": "category",
+    "annual_spend": "float",
+    "on_time_delivery_pct": "float",
+    "quality_score": "float"
+   },
+   "required": [
+    "supplier_id",
+    "name"
+   ],
+   "foreign_keys": {
+    "region_id": "regions.region_id"
+   },
+   "ranges": {
+    "on_time_delivery_pct": [
+     0,
+     100
+    ],
+    "quality_score": [
+     0,
+     10
+    ]
+   }
+  },
+  "incidents": {
+   "path": "incidents_api",
+   "format": "api_pages",
+   "records_key": "data",
+   "primary_key": "incident_id",
+   "schema": {
+    "incident_id": "string",
+    "region_id": "string",
+    "bu_id": "string",
+    "supplier_id": "string",
+    "severity": "category",
+    "category": "category",
+    "opened_at": "datetime",
+    "resolved_at": "datetime",
+    "cost_impact": "float"
+   },
+   "required": [
+    "incident_id",
+    "region_id",
+    "opened_at"
+   ],
+   "foreign_keys": {
+    "region_id": "regions.region_id",
+    "bu_id": "business_units.bu_id",
+    "supplier_id": "suppliers.supplier_id"
+   },
+   "categories": {
+    "severity": [
+     "SEV1",
+     "SEV2",
+     "SEV3",
+     "SEV4"
+    ]
+   },
+   "temporal_order": [
+    [
+     "opened_at",
+     "resolved_at"
+    ]
+   ]
+  },
+  "risk_indicators": {
+   "path": "risk_indicators.jsonl",
+   "format": "jsonl",
+   "primary_key": [
+    "region_id",
+    "month"
+   ],
+   "schema": {
+    "region_id": "string",
+    "month": "date",
+    "fx_volatility": "float",
+    "compliance_score": "float",
+    "supplier_concentration": "float",
+    "credit_exposure": "float"
+   },
+   "required": [
+    "region_id",
+    "month"
+   ],
+   "foreign_keys": {
+    "region_id": "regions.region_id"
+   },
+   "ranges": {
+    "compliance_score": [
+     0,
+     100
+    ],
+    "supplier_concentration": [
+     0,
+     1
+    ]
+   }
+  }
+ }
+}

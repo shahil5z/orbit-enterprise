@@ -1,0 +1,12 @@
+[package]
+name = "orbit-anomaly-scorer"
+version = "0.1.0"
+edition = "2021"
+description = "Trailing-window robust (median/MAD) anomaly scoring for ORBIT operational metrics"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
