@@ -1,73 +1,142 @@
 <p align="center">
-  <img src="logo.png" alt="ORBIT ENTERPRISE logo" width="180" />
+  <img src="logo.png" alt="ORBIT ENTERPRISE logo" width="140" />
 </p>
 
 <h1 align="center">ORBIT ENTERPRISE</h1>
 
-<p align="center"><strong>End-to-End Enterprise Data &amp; Decision Intelligence Platform</strong></p>
+<h3 align="center">End-to-End Enterprise Data &amp; Decision Intelligence Platform</h3>
 
 <p align="center">
-  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" /></a>
+  ORBIT ENTERPRISE takes simulated enterprise data from raw sources through validation, distributed curation, statistics, machine learning, risk simulation and optimization, and turns the results into prioritized, evidence-backed decisions. Each recommendation can be traced back to the forecast, model, metric and dataset behind it.
+</p>
+
+<p align="center">
+  <a href="https://orbit-enterprise.vercel.app"><img alt="Live Demo" src="https://img.shields.io/badge/Live%20Demo-orbit--enterprise.vercel.app-000000?logo=vercel&logoColor=white" /></a>
   <img alt="Python 3.13" src="https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white" />
   <img alt="React 18" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white" />
   <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-0.162-009688?logo=fastapi&logoColor=white" />
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Neon-4169E1?logo=postgresql&logoColor=white" />
-  <img alt="Deployed on Vercel" src="https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white" />
+  <img alt="Apache Spark" src="https://img.shields.io/badge/Apache%20Spark-4-E25A1C?logo=apachespark&logoColor=white" />
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" /></a>
 </p>
 
 <p align="center">
   <a href="https://orbit-enterprise.vercel.app"><strong>Demo Site: https://orbit-enterprise.vercel.app</strong></a>
 </p>
 
-<p align="center">Designed and developed by Shohrab Haque Shahil</p>
+<p align="center"><strong>Designed and developed by Shohrab Haque Shahil</strong></p>
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Key Capabilities](#key-capabilities)
+- [Architecture](#architecture)
+- [End-to-End Pipeline](#end-to-end-pipeline)
+- [Technology Stack](#technology-stack)
+- [Engineering & Model Results](#engineering--model-results)
+- [Data Quality](#data-quality)
+- [Model Intelligence](#model-intelligence)
+- [System & Pipeline Observability](#system--pipeline-observability)
+- [Testing](#testing)
+- [Production Architecture](#production-architecture)
+- [Data Notice](#data-notice)
+- [Limitations](#limitations)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Documentation](#documentation)
+- [License](#license)
+- [Author](#author)
 
 ---
 
 ## Overview
 
-ORBIT ENTERPRISE is an end-to-end enterprise data and decision intelligence platform. It takes business data through ingestion, validation, transformation, distributed processing, statistical analysis, machine learning, risk analysis, optimization and decision workflows, and serves the results through a governed API and a web interface.
+ORBIT ENTERPRISE is an end-to-end enterprise data and decision intelligence platform. It demonstrates an integrated enterprise data architecture in which business data moves through one governed flow:
 
-It is designed to show how specialized technologies work together in a realistic enterprise data architecture: Python orchestrates, Spark/Scala curates, R runs statistics, Rust scores at speed, C++ simulates risk, Julia optimizes, PostgreSQL persists and FastAPI plus React/TypeScript deliver decisions to people.
+```
+business data > ingestion > validation > transformation > distributed processing > statistics
+  > machine learning > risk analysis > optimization > decision workflows > governed API > web interface
+```
 
-The platform covers data engineering, data quality, analytics, statistical analysis, machine learning, forecasting, anomaly detection, customer intelligence, risk analysis, optimization, decision intelligence, model management, pipeline observability, API and system integration, and business-facing visualization. Every recommendation carries a traceable "Why?" chain: recommendation > forecast > model output > metric > dataset. There is no LLM in the decision path.
+Each technology has one clear responsibility:
+
+| Layer | Responsibility |
+|---|---|
+| Python | Orchestrates the pipeline |
+| Spark / Scala | Curates data at scale |
+| R | Statistical analysis |
+| Rust | High-performance scoring |
+| C++ | Monte Carlo risk simulation |
+| Julia | Optimization |
+| PostgreSQL / Neon | Persists results |
+| FastAPI | Serves the API |
+| React / TypeScript | Web interface |
+
+Decisions come from models, statistics, simulation, optimization and a rules engine. There is no LLM in the decision path, and the platform is not an agent system.
 
 ## Key Capabilities
 
-- Multi-source ingestion (CSV, JSON, Parquet) with schema and quality validation; failing records are quarantined, not dropped.
-- 11-stage orchestrated pipeline with a run id and per-stage lineage.
-- Revenue forecasting, churn classification, operations anomaly detection and customer segmentation, versioned in a model registry.
-- Region and business-unit risk scoring with named factors, weights and confidence, plus C++ Monte Carlo revenue-at-risk (VaR, CVaR).
-- Julia JuMP + HiGHS mixed-integer allocation of marketing spend and hires under budget, headcount and risk constraints.
-- Rules-based decision engine with prioritized, evidence-backed recommendations and a Scenario Lab for what-if levers.
-- 13-page web app with URL-persisted filters, global search, CSV and Markdown exports, and BI exports for Tableau, Power BI and QlikView.
+### Data Engineering
+
+- Multi-source ingestion (CSV, JSON, Parquet)
+- Schema and quality validation with per-dataset scoring
+- Quarantine of failing records instead of silent drops
+- 11-stage orchestrated pipeline with run IDs and per-stage lineage
+
+### Analytics & Machine Learning
+
+- Revenue forecasting, churn classification, operations anomaly detection and customer segmentation
+- Versioned models in a model registry
+- Baseline comparisons for every model
+
+### Risk & Optimization
+
+- Region and business-unit risk scoring with named factors, weights and confidence
+- C++ Monte Carlo revenue-at-risk (VaR, CVaR)
+- Julia JuMP + HiGHS mixed-integer allocation of marketing spend and hires under budget, headcount and risk constraints
+
+### Decision Intelligence
+
+- Rules-based decision engine with prioritized, evidence-backed recommendations
+- Traceable "Why?" chain for every recommendation
+- Scenario Lab for what-if levers
+
+### Enterprise Interface
+
+- 13-page React application
+- URL-persisted filters and global search
+- CSV and Markdown exports
+- BI exports for Tableau, Power BI and QlikView
 
 ## Architecture
 
 ```mermaid
 flowchart TD
-  RAW["Raw enterprise data<br/>(simulated CRM, ERP, finance, HR, operations)"] --> ING["Ingestion (Python)"]
-  ING --> VAL["Validation and quality scoring (Python)"]
-  VAL --> TR["Transformation / conformance (Python)"]
-  TR --> SP["Curation (Spark / Scala)"]
-  SP --> AN["Analytics (Python) + statistics (R)"]
-  AN --> ML["Machine learning: training (scikit-learn, statsmodels)"]
-  ML --> PR["Scoring (Python) + high-performance scoring (Rust)"]
-  PR --> RK["Risk scoring (Python) + Monte Carlo (C++)"]
-  RK --> OPT["Optimization (Julia JuMP + HiGHS)"]
-  OPT --> DEC["Decision intelligence (Python rules engine)"]
-  DEC --> PG[("PostgreSQL (local) / Neon (hosted)")]
+  RAW["Raw enterprise data<br/>simulated CRM, ERP, finance, HR, operations"] --> ING["Ingestion<br/>Python"]
+  ING --> VAL["Validation and quality<br/>Python"]
+  VAL --> TR["Transformation<br/>Python"]
+  TR --> SP["Curation<br/>Spark / Scala"]
+  SP --> AN["Analytics + statistics<br/>Python + R"]
+  AN --> ML["ML training<br/>scikit-learn, statsmodels"]
+  ML --> PR["Prediction<br/>Python + Rust"]
+  PR --> RK["Risk<br/>Python + C++ Monte Carlo"]
+  RK --> OPT["Optimization<br/>Julia JuMP + HiGHS"]
+  OPT --> DEC["Decision intelligence<br/>Python rules engine"]
+  DEC --> PG[("PostgreSQL local / Neon hosted")]
   PG --> API["FastAPI"]
-  API --> WEB["React / TypeScript"]
-  WEB --> UI["ORBIT ENTERPRISE web interface"]
-  JAVA["Java integration service<br/>(standalone simulated CRM / ERP REST API)"] -.- ING
+  API --> WEB["React / TypeScript web interface"]
+  JAVA["Java integration service<br/>simulated CRM / ERP REST API<br/>not a pipeline stage"] -.- ING
+  style JAVA stroke-dasharray: 5 5
 ```
 
 The Java service exposes simulated CRM accounts and ERP suppliers and purchase orders over REST. It runs alongside the platform as an integration endpoint; the orchestrator ingests the same sources from files, so the Java service is not a pipeline stage.
 
 ## End-to-End Pipeline
 
-`pipelines/orchestrator.py` runs all 11 stages. Latest run `20261026T190344Z-3ee718d0` (published to the production database on 2026-10-27): all stages SUCCESS, about 54 s end to end, 467,465 rows published to PostgreSQL.
+`pipelines/orchestrator.py` runs all 11 stages in order.
 
 | # | Stage | Technology | Purpose |
 |---|---|---|---|
@@ -83,63 +152,110 @@ The Java service exposes simulated CRM accounts and ERP suppliers and purchase o
 | 10 | DECISION | Python | Prioritized recommendations with evidence references |
 | 11 | PUBLISH | PostgreSQL | Load all outputs, lineage and model metadata into the warehouse |
 
+> **Latest verified local run** (`20261026T190344Z-3ee718d0`, published to the production database on 2026-10-27)
+>
+> - 11/11 stages successful
+> - About 54 seconds end to end
+> - 467,465 rows published to PostgreSQL
+>
+> This is a local workstation run on the simulated dataset, not a production-scale benchmark.
+
 ## Technology Stack
 
-| Technology | Responsibility |
+| Technology | Role in ORBIT ENTERPRISE |
 |---|---|
-| Python 3.13 (pandas, NumPy, PyArrow) | Orchestration, ingestion, validation, transformation, analytics, decision engine |
-| scikit-learn, statsmodels | Forecasting, churn classification, anomaly detection, segmentation |
-| Spark 4 / Scala | Distributed curation and aggregation |
-| R | Statistical analysis: paired t-test, ANOVA with Tukey HSD, regression diagnostics, rank correlation |
+| Python 3.13 (pandas, NumPy, PyArrow) | Orchestration, ingestion, validation, transformation, analytics and the decision engine |
+| scikit-learn, statsmodels | Forecasting, churn classification, anomaly detection and segmentation |
+| Apache Spark 4 / Scala | Distributed curation and aggregation |
+| R | Statistics: paired t-test, ANOVA with Tukey HSD, regression diagnostics, rank correlation |
 | Rust | High-performance batch anomaly scoring |
 | C++ | Monte Carlo revenue-at-risk simulation |
-| Julia (JuMP + HiGHS) | Mixed-integer optimization |
+| Julia (JuMP + HiGHS) | Mixed-integer optimization of budget and hiring |
 | Java 21 | Integration service exposing simulated CRM and ERP REST endpoints (JDK only) |
 | PostgreSQL 17 / Neon | Warehouse, lineage, model registry and persisted artifacts |
 | FastAPI, Pydantic, psycopg 3 | Versioned REST API with a standard response envelope |
-| React 18, TypeScript, Vite, Recharts | Enterprise web interface |
+| React 18, TypeScript, Vite, Recharts | Web interface |
 | Vercel | Hosting for the web app and the API as a Python function |
+
+See [technology rationale](docs/technology-rationale.md) for why each one was chosen.
 
 ## Engineering & Model Results
 
-Measured on holdout splits of the simulated enterprise dataset. They demonstrate the methodology, not real-world business performance.
+These measurements are engineering demonstrations on the simulated enterprise dataset, not claims of production business performance.
 
-| Result | Value |
+| Metric | Result |
 |---|---|
 | Revenue forecast (ridge, year-over-year features), test MAPE | 9.0% vs 15.3% for the seasonal naive baseline |
-| Churn classifier, test ROC AUC | 0.909 (PR AUC 0.721) |
-| Operations anomaly detector (Isolation Forest), test | precision 0.619, recall 0.963, F1 0.754 |
-| Rust vs Python scoring, 32,880 rows | about 24x faster in the first verified run, 29x in the latest run; scores match within 5.5e-7 |
+| Churn classifier, test ROC AUC | 0.909 |
+| Churn classifier, test PR AUC | 0.721 |
+| Operations anomaly detector (Isolation Forest), test | Precision 0.619, recall 0.963, F1 0.754 |
+| Rust vs Python scoring, 32,880 rows | About 29x faster in the latest measured run; scores match within 5.5e-7 |
 | Optimization vs pro-rata baseline (default parameters) | +7.98%, about 2.13M, status OPTIMAL |
 
 The naive forecast baseline still wins in 4 of 6 regions, and the Forecasts page says so per region.
 
 ## Data Quality
 
-Every dataset is scored against schema, completeness, uniqueness, validity, consistency and referential-integrity rules, with schema-drift detection. Failing records go to a quarantine zone with the rule that rejected them. The Data Quality page shows scores per dataset, issue details, ingestion counts and pipeline status.
+Every dataset is scored against a fixed set of rule families. Failing records go to a quarantine zone together with the rule that rejected them.
+
+| Check | What it covers |
+|---|---|
+| Schema | Expected columns and types, with schema-drift detection |
+| Completeness | Missing required values |
+| Uniqueness | Duplicate keys |
+| Validity | Ranges, formats and allowed values |
+| Consistency | Agreement between related fields |
+| Referential integrity | Foreign keys that resolve to known entities |
+
+The Data Quality page shows scores per dataset, issue details, ingestion counts and pipeline status.
 
 ## Model Intelligence
 
-Models are versioned (`ml/artifacts`) and registered in `model_runs` with parameters, test metrics and baselines. The Model Intelligence page compares each model with its baseline and shows the metrics behind every prediction used downstream.
+- Versioned model artifacts in `ml/artifacts`
+- Model registry in the `model_runs` table with parameters, test metrics and baselines
+- Prediction metadata linking every downstream prediction to its model version
+- Model Intelligence page comparing each model with its baseline
+
+Every recommendation carries a traceable "Why?" chain:
+
+```
+recommendation > forecast > model output > metric > dataset
+```
 
 ## System & Pipeline Observability
 
-Each run records stage status, duration, record counts and errors in `pipeline_runs`. The System & Pipeline page shows run history, stage timings, table counts and the Rust benchmark. The API returns structured JSON logs and a request id on every response.
+- Pipeline run IDs with per-stage status, duration, record counts and errors, stored in `pipeline_runs`
+- Run history and warehouse table counts on the System & Pipeline page
+- Rust vs Python scoring benchmark
+- A request ID on every API response and structured JSON API logs
 
 ## Testing
 
-Latest results, rerun for this release:
-
-| Suite | Result |
+| Test Area | Result |
 |---|---|
-| pytest (unit, API contract, live database, Julia, publish round trip, ID endpoints) | 137 passed, 0 skipped |
-| Java integration SelfTest | 21 / 21 passed |
-| Rust `cargo test` | 2 / 2 passed |
+| pytest (unit, API contract, live database, Julia, publish round trip, ID endpoints) | 138 passed |
+| Java integration SelfTest | 21/21 passed |
+| Rust | 2/2 passed |
 | Vitest (components, states, filters, branding) | 26 passed |
-| ESLint and TypeScript `tsc --noEmit` | passing, 0 warnings |
-| Production build (Vite) | passing |
-| Playwright, local (desktop 1440, laptop 1280, tablet 820, mobile 390) | 20 passed |
-| Playwright, production: pages, branding, footer, deep links and the 8 ID endpoints at 4 widths | see the release verification below |
+| ESLint | Passing, 0 warnings |
+| TypeScript (`tsc --noEmit`) | Passing |
+| Production build (Vite) | Passing |
+| Playwright on production (desktop, laptop, tablet, mobile) | 20 passed |
+
+The 8 ID-based production endpoints were explicitly tested with both valid and invalid IDs.
+
+| Endpoint | Valid ID | Invalid ID | Result |
+|---|---|---|---|
+| `risks/region/{id}` | 200 | 400 | Pass |
+| `anomalies/{id}` | 200 | 404 / 422 | Pass |
+| `decisions/{id}/trace` | 200 | 404 | Pass |
+| `data/quality/{dataset}` | 200 | 404 | Pass |
+| `exports/{kind}` | 200 | 422 | Pass |
+| `optimization/{id}` | 200 | 404 | Pass |
+| `models/{version}` | 200 | 404 | Pass |
+| `operations/runs/{id}` | 200 | 404 | Pass |
+
+None of the tested error responses leaked internal details. Valid IDs are discovered from the live list endpoints, not hardcoded.
 
 ```powershell
 .\scripts\orbit.ps1 test        # pytest
@@ -149,29 +265,39 @@ Latest results, rerun for this release:
 .\scripts\orbit.ps1 e2e         # Playwright at 4 widths
 ```
 
-`ORBIT_WEB_URL=https://orbit-enterprise.vercel.app npx playwright test` runs the same suite, including `e2e/id-endpoints.spec.ts`, against production. Valid IDs are discovered from the live list endpoints.
+Setting `ORBIT_WEB_URL=https://orbit-enterprise.vercel.app` runs the same Playwright suite, including `e2e/id-endpoints.spec.ts`, against production.
 
 ## Production Architecture
 
-Current deployment model:
-
-```
-Local computational pipeline (Spark, R, Rust, C++, Julia, model training)
-  > persisted results (warehouse tables + JSON artifacts)
-  > Neon PostgreSQL (orbit.ps1 publish-hosted)
-  > FastAPI as a Vercel Python function (region sin1)
-  > React / TypeScript on Vercel (same origin, /api/v1)
+```mermaid
+flowchart LR
+  LOCAL["Local compute<br/>Spark, R, Rust, C++, Julia, model training"] --> RES["Persisted results<br/>warehouse tables + JSON artifacts"]
+  RES -->|"orbit.ps1 publish-hosted"| NEON[("Neon PostgreSQL")]
+  NEON --> FAPI["FastAPI on Vercel<br/>Python function, region sin1"]
+  FAPI --> UI["React / TypeScript on Vercel<br/>same origin, /api/v1"]
 ```
 
-Spark, Julia and model training do not run on Vercel. The hosted API reads what the pipeline persisted. The optimization page explains that new solves run locally and shows the latest persisted run. This keeps the serverless function small and honest about where compute happens.
+- Heavy computational workloads stay on the local workstation.
+- Vercel does not run Spark, Julia or model training; the hosted API serves the persisted results.
+- In the hosted demo, the Optimization page shows the latest persisted run and explains that new solves run locally.
+- This split is intentional and keeps the serverless function small and transparent about where compute happens.
 
-Security: same-origin API (CORS rejects foreign origins), CSP, HSTS, X-Frame-Options, nosniff, Referrer-Policy and Permissions-Policy headers, a 32 KB body limit, a per-instance rate limit, sanitized errors without stack traces, API docs disabled in production, and database credentials held only in server-side environment variables.
+### Security
+
+- Same-origin API; CORS rejects foreign origins
+- CSP, HSTS, X-Frame-Options, nosniff, Referrer-Policy and Permissions-Policy headers
+- 32 KB request body limit and per-instance rate limiting
+- Sanitized errors without stack traces
+- Interactive API docs page disabled in production (the `/api/v1/openapi.json` schema remains public)
+- Database credentials held only in server-side environment variables
+- No secrets committed to the repository
 
 ## Data Notice
 
-Data Notice: ORBIT uses a simulated enterprise dataset designed to reproduce realistic relationships between customers, transactions, operations, employees, suppliers, risk indicators and business outcomes. Results are demonstrative and should not be interpreted as production business forecasts.
+> **Data Notice:** ORBIT uses a simulated enterprise dataset designed to reproduce realistic relationships between customers, transactions, operations, employees, suppliers, risk indicators and business outcomes. Results are demonstrative and should not be interpreted as production business forecasts.
 
-- The dataset is synthetic, produced by a seeded generator. No real company, customer or person is represented.
+- The dataset is synthetic, produced by a seeded generator.
+- No real company, customer or person is represented.
 - Model metrics are demonstrative and describe performance on simulated data.
 - Optimization response coefficients include planning assumptions rather than estimates from observed outcomes.
 - A production deployment would require real enterprise data, recalibrated models and validated coefficients.
@@ -179,52 +305,108 @@ Data Notice: ORBIT uses a simulated enterprise dataset designed to reproduce rea
 
 ## Limitations
 
+These are known deployment boundaries of the hosted demo:
+
 - Heavy compute runs locally; the hosted site serves the latest published run and cannot solve new optimization parameters.
 - No authentication: the demo is public and read-mostly. Write endpoints are limited to scenario runs and the optimization request, which does not mutate data when hosted.
-- The rate limiter is per function instance, not global.
-- Cold starts of the Python function add latency to the first request after idle; the heaviest views take a few seconds.
+- Rate limiting is per function instance, not global.
+- Vercel cold starts add latency to the first request after idle; the heaviest views take a few seconds.
 - BI guides for Tableau, Power BI and QlikView are not tested inside those tools.
 
 ## Getting Started
 
-Windows PowerShell, from the project root. Toolchains live in `.tools\` (gitignored).
+### Prerequisites
+
+Windows PowerShell, run from the project root. Portable toolchains live in `.tools\` (gitignored).
+
+### Local Environment
 
 ```powershell
 . .\scripts\env.ps1                 # portable tools on PATH
 .\scripts\orbit.ps1 install         # Python venv + requirements-dev.txt
+```
+
+Copy `.env.example` to `.env` (placeholders only). Key variables:
+
+| Variable | Purpose |
+|---|---|
+| `ORBIT_ENV` | `local`, `dev` or `prod` |
+| `DATABASE_URL` | Server only; set by the Neon integration on Vercel |
+| `ORBIT_CORS_ORIGINS` | Allowed origins for local development; empty in production, where the app and API share one origin |
+| `ORBIT_LOCAL_ENGINES` | Optional override for running the local compute engines |
+| `ORBIT_TARGET_DATABASE_URL` | Shell only, for `publish-hosted` |
+
+### Database
+
+```powershell
 .\scripts\orbit.ps1 db-start        # portable PostgreSQL 17
 .\scripts\orbit.ps1 migrate
-.\scripts\orbit.ps1 pipeline        # all 11 stages (add -Regenerate for fresh data)
+```
+
+### Pipeline
+
+```powershell
+.\scripts\orbit.ps1 pipeline        # all 11 stages (add --regenerate for fresh data)
+```
+
+### API
+
+```powershell
 .\scripts\orbit.ps1 api             # FastAPI on http://127.0.0.1:8000/api/v1
+```
+
+### Web Application
+
+```powershell
 .\scripts\orbit.ps1 web-install
 .\scripts\orbit.ps1 web-dev         # Vite dev server, proxies /api to :8000
 ```
 
-Copy `.env.example` to `.env` (placeholders only). Key variables: `ORBIT_ENV` (`local`, `dev`, `prod`), `DATABASE_URL` (server only, set by the Neon integration on Vercel), `ORBIT_CORS_ORIGINS`, `ORBIT_LOCAL_ENGINES` and `ORBIT_TARGET_DATABASE_URL` (shell only, for `publish-hosted`).
-
 ## Project Structure
 
 ```
-api/index.py            Vercel Python function entrypoint
-apps/api/orbit_api      FastAPI routes, services, repository, security middleware
-apps/web                React + TypeScript app (src/features, src/components, e2e)
-analytics/              python, r, rust (anomaly_scorer), cpp (Monte Carlo), julia
-pipelines/              ingestion, validation, transformation, spark, orchestrator
-ml/                     forecasting, classification, anomaly_detection, risk, evaluation
-decision/ optimization/ decision engine, scenarios, optimization workflow
-database/               migrations, views, seeds (load.py, publish.py)
-services/java           CRM / ERP integration service
-bi/ docs/ tests/        BI export, documentation, pytest suites
-scripts/                env.ps1, orbit.ps1
-vercel.json             build, function, rewrites and security headers
+orbit-enterprise/
+├── analytics/      Python, R, Rust, C++ and Julia analytics engines
+├── api/            Vercel Python function entrypoint
+├── apps/
+│   ├── api/        FastAPI routes, services, repository, security middleware
+│   └── web/        React + TypeScript app, tests and Playwright e2e
+├── bi/             Tableau, Power BI and QlikView export
+├── configs/        Source definitions
+├── data/
+│   └── samples/    Sample CRM and ERP source files
+├── database/       Migrations, schema views and seeds (load, publish)
+├── decision/       Decision engine and scenarios
+├── docs/           Documentation and screenshots
+├── ml/             Forecasting, classification, anomaly detection, risk, evaluation
+├── optimization/   Optimization workflow
+├── orbit_core/     Shared configuration, I/O, KPI definitions, logging and run tracking
+├── pipelines/      Ingestion, validation, transformation, Spark, orchestrator
+├── scripts/        env.ps1 and orbit.ps1
+├── services/
+│   └── java/       CRM / ERP integration service
+├── tests/          pytest suites
+├── LICENSE
+├── README.md
+└── vercel.json     Build, function, rewrites and security headers
 ```
 
-Further reading: [architecture](docs/architecture.md), [data pipeline](docs/data-pipeline.md), [ML system](docs/ml-system.md), [optimization](docs/optimization.md), [decision intelligence](docs/decision-intelligence.md), [API](docs/api.md).
+## Documentation
+
+| Area | Documents |
+|---|---|
+| Architecture | [Architecture](docs/architecture.md), [Technology rationale](docs/technology-rationale.md), [Data model](docs/data-model.md) |
+| Data Pipeline | [Data pipeline](docs/data-pipeline.md), [KPI governance](docs/kpi-governance.md) |
+| ML System | [ML system](docs/ml-system.md) |
+| Optimization | [Optimization](docs/optimization.md) |
+| Decision Intelligence | [Decision intelligence](docs/decision-intelligence.md) |
+| API | [API](docs/api.md) |
+| BI | [BI overview](docs/bi/README.md), [Tableau](docs/bi/tableau.md), [Power BI](docs/bi/powerbi.md), [QlikView](docs/bi/qlikview.md) |
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
+Released under the [MIT License](LICENSE).
 
 ## Author
 
-Designed and developed by Shohrab Haque Shahil
+**Designed and developed by Shohrab Haque Shahil**
