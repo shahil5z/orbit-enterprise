@@ -16,6 +16,8 @@ from orbit_core.logging import get_logger, log
 
 from .envelope import fail, ok
 from .repository import Repository
+from .insights import InsightService
+from .routes_insights import build_insights_router
 from .services import Conflict, NotFound, OrbitService
 
 logger = get_logger("api")
@@ -30,10 +32,11 @@ class OptimizationParams(BaseModel):
 
 
 def create_app(repo: Repository | None = None) -> FastAPI:
-    app = FastAPI(title="ORBIT // ENTERPRISE API", version="1.0.0",
+    app = FastAPI(title="ORBIT // ENTERPRISE API", version="2.0.0",
                   description="Decision intelligence API over simulated enterprise data. All responses use the "
                               "envelope {success, data, metadata, errors}.")
     app.state.service = OrbitService(repo or Repository())
+    app.state.insights = InsightService(app.state.service)
     app.add_middleware(CORSMiddleware, allow_origins=list(SETTINGS.cors_origins), allow_methods=["GET", "POST"],
                        allow_headers=["Content-Type"])
 
@@ -69,6 +72,7 @@ def create_app(repo: Repository | None = None) -> FastAPI:
         log(logger, "unhandled_error", path=request.url.path, error_type=type(exc).__name__, error=str(exc)[:500])
         return fail(500, "INTERNAL_ERROR", "internal error; see server logs")
 
+    app.include_router(build_insights_router(), prefix="/api/v1")
     app.include_router(build_router(), prefix="/api/v1")
     return app
 

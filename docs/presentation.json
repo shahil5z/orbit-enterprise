@@ -1,0 +1,23 @@
+{
+  "title": "ORBIT // ENTERPRISE",
+  "subtitle": "End-to-End Enterprise Data & Decision Intelligence Platform",
+  "data_label": "Simulated enterprise dataset",
+  "logo": "logo.png",
+  "phase": 2,
+  "status_date": "2026-10-26",
+  "timezone": "Asia/Calcutta",
+  "pipeline_run_id": "20261026T160340Z-f5255777",
+  "story": [
+    {"slide": "Problem", "points": ["Siloed sales, operations, HR, supplier and incident data", "Decisions made without traceable evidence"]},
+    {"slide": "Platform", "points": ["11-stage pipeline: ingest, validate, transform, Spark curate, analyze, train, predict, risk, optimize, decide, publish", "PostgreSQL, FastAPI, Java integration, Rust and C++ scorers, Julia optimizer, React UI"]},
+    {"slide": "Overview", "screenshot": "docs/screenshots/02-overview.png", "points": ["TTM KPIs with prior-period comparison", "EMEA South (R04) revenue TTM -26.1%"]},
+    {"slide": "Forecasts", "screenshot": "docs/screenshots/05-forecasts.png", "points": ["ridge_yoy model, test MAPE 9.0% vs 15.3% seasonal naive", "Naive baseline still wins in R01, R02, R03 and R06, and the UI says so per region"]},
+    {"slide": "Risk", "screenshot": "docs/screenshots/06-risk.png", "points": ["Score with factor contributions and a confidence value", "Level written as text, never colour alone"]},
+    {"slide": "Optimization", "screenshot": "docs/screenshots/08-optimization.png", "points": ["Julia JuMP + HiGHS budget and hiring allocation", "Constraint changes rerun the real solver and compare against the prior run"]},
+    {"slide": "Decision Center", "screenshot": "docs/screenshots/11-decision-trace.png", "points": ["Why? chain: recommendation, forecast, model output, metric, dataset"]},
+    {"slide": "Data Quality", "screenshot": "docs/screenshots/12-quality.png", "points": ["Per-dataset score; incidents 93.89 is Unhealthy", "Ingestion and pipeline stage status"]},
+    {"slide": "Verification", "points": ["pytest 115 passed on the laptop", "vitest 24 passed", "Playwright 7 passed (4 journeys + all pages at 3 viewports, no console errors)"]},
+    {"slide": "Limits and next", "points": ["Simulated data only", "No auth, no deployment (Phase 3)", "Recharts bundle 112 kB gzip"]}
+  ],
+  "screenshots_dir": "docs/screenshots"
+}

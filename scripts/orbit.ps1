@@ -9,7 +9,7 @@
 param(
   [Parameter(Position = 0)]
   [ValidateSet("help", "versions", "install", "setup", "db-start", "db-stop", "migrate", "seed", "pipeline", "stage",
-               "train", "test", "dev", "api", "java", "java-test", "web-check")]
+               "train", "test", "dev", "api", "java", "java-test", "web-install", "web-dev", "web-build", "web-preview", "web-test", "e2e", "screenshots", "bi-export", "web-check")]
   [string]$Command = "help",
   [Parameter(Position = 1, ValueFromRemainingArguments = $true)]
   [string[]]$Rest
@@ -23,6 +23,11 @@ Set-Location $Root
 function Invoke-Checked([string]$exe, [string[]]$argv) {
   & $exe @argv
   if ($LASTEXITCODE -ne 0) { throw "$exe exited with code $LASTEXITCODE" }
+}
+
+function Get-NpmCli {
+  # npm.cmd breaks on the "&" in this path, so npm-cli.js is run with node directly
+  Join-Path (Split-Path (Get-Command node).Source) "node_modules\npm\bin\npm-cli.js"
 }
 
 function Start-Db {
@@ -40,7 +45,7 @@ function Get-JavaClasses {
 }
 
 switch ($Command) {
-  "help" { Get-Help $PSCommandPath -Detailed; Write-Host "Commands: versions install setup db-start db-stop migrate seed pipeline stage <name...> train test dev api java java-test web-check" }
+  "help" { Get-Help $PSCommandPath -Detailed; Write-Host "Commands: versions install setup db-start db-stop migrate seed pipeline stage <name...> train test dev api java java-test web-install web-dev web-build web-preview web-test e2e screenshots bi-export web-check" }
   "versions" {
     python --version; java -version 2>&1 | Select-Object -First 1; node --version; rustc --version; g++ --version | Select-Object -First 1
     Rscript --version; julia --version; postgres --version; git --version
@@ -71,6 +76,36 @@ switch ($Command) {
   { $_ -in "dev", "api" } { Start-Db; Invoke-Checked "python" @("-m", "uvicorn", "apps.api.orbit_api.main:app", "--host", "127.0.0.1", "--port", "8000") }
   "java" { $cp = Get-JavaClasses; Invoke-Checked "java" @("-Dorbit.root=$Root", "-cp", $cp, "com.orbit.integration.IntegrationServer") }
   "java-test" { $cp = Get-JavaClasses; Invoke-Checked "java" @("-cp", $cp, "com.orbit.integration.SelfTest") }
+  "web-install" {
+    $env:PLAYWRIGHT_BROWSERS_PATH = Join-Path $T "ms-playwright"
+    Push-Location apps\web
+    try {
+      Invoke-Checked "node" @((Get-NpmCli), "install", "--cache", (Join-Path $T "npm-cache"), "--no-audit", "--no-fund")
+      Invoke-Checked "node" @("node_modules\@playwright\test\cli.js", "install", "chromium")
+    } finally { Pop-Location }
+  }
+  "web-dev" { Push-Location apps\web; try { Invoke-Checked "node" @("node_modules\vite\bin\vite.js", "--host", "127.0.0.1") } finally { Pop-Location } }
+  "web-build" { Push-Location apps\web; try { Invoke-Checked "node" @("node_modules\typescript\bin\tsc", "--noEmit"); Invoke-Checked "node" @("node_modules\vite\bin\vite.js", "build") } finally { Pop-Location } }
+  "web-preview" { Push-Location apps\web; try { Invoke-Checked "node" @("node_modules\vite\bin\vite.js", "preview", "--host", "127.0.0.1", "--port", "4173", "--strictPort") } finally { Pop-Location } }
+  "web-test" {
+    Push-Location apps\web
+    try {
+      Invoke-Checked "node" @("node_modules\eslint\bin\eslint.js", "src", "e2e")
+      Invoke-Checked "node" @("node_modules\typescript\bin\tsc", "--noEmit")
+      Invoke-Checked "node" @("node_modules\vitest\vitest.mjs", "run")
+    } finally { Pop-Location }
+  }
+  "e2e" {
+    # needs the API (orbit.ps1 api) and a built preview (web-build, then web-preview) running
+    $env:PLAYWRIGHT_BROWSERS_PATH = Join-Path $T "ms-playwright"
+    Push-Location apps\web; try { Invoke-Checked "node" (@("node_modules\@playwright\test\cli.js", "test", "--project=desktop", "--project=laptop", "--project=tablet") + $Rest) } finally { Pop-Location }
+  }
+  "screenshots" {
+    $env:PLAYWRIGHT_BROWSERS_PATH = Join-Path $T "ms-playwright"
+    $env:ORBIT_SCREENSHOT_DIR = Join-Path $Root "docs\screenshots"
+    Push-Location apps\web; try { Invoke-Checked "node" @("node_modules\@playwright\test\cli.js", "test", "--project=screenshots") } finally { Pop-Location }
+  }
+  "bi-export" { Start-Db; Invoke-Checked "python" (@("-m", "bi.export") + $Rest) }
   "web-check" {
     # node is called directly: .cmd shims (npx) break on the "&" in this project path
     Push-Location apps\web; Invoke-Checked "node" @("node_modules\typescript\bin\tsc", "--noEmit"); Pop-Location

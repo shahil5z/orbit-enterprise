@@ -19,3 +19,6 @@ __pycache__/
 *.class
 Thumbs.db
 src_*.tar
+apps/web/test-results/
+apps/web/playwright-report/
+data/bi/

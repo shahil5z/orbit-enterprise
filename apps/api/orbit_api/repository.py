@@ -9,11 +9,13 @@ from psycopg.rows import dict_row
 
 from orbit_core.config import SETTINGS
 
+from .insights_repo import InsightQueries
+
 RUN_TABLES = {"data_quality_runs", "forecasts", "predictions", "risks", "recommendations", "optimization_runs",
               "pipeline_runs"}
 
 
-class Repository:
+class Repository(InsightQueries):
     def __init__(self, dsn: str | None = None):
         self.dsn = dsn or SETTINGS.dsn
 
