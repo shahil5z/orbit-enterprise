@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  ORBIT // ENTERPRISE developer commands. Everything runs from project-local toolchains in .tools.
+  ORBIT ENTERPRISE developer commands. Everything runs from project-local toolchains in .tools.
 .EXAMPLE
   .\scripts\orbit.ps1 setup
   .\scripts\orbit.ps1 pipeline
@@ -99,7 +99,7 @@ switch ($Command) {
   "e2e" {
     # needs the API (orbit.ps1 api) and a built preview (web-build, then web-preview) running
     $env:PLAYWRIGHT_BROWSERS_PATH = Join-Path $T "ms-playwright"
-    Push-Location apps\web; try { Invoke-Checked "node" (@("node_modules\@playwright\test\cli.js", "test", "--project=desktop", "--project=laptop", "--project=tablet") + $Rest) } finally { Pop-Location }
+    Push-Location apps\web; try { Invoke-Checked "node" (@("node_modules\@playwright\test\cli.js", "test", "--project=desktop", "--project=laptop", "--project=tablet", "--project=mobile") + $Rest) } finally { Pop-Location }
   }
   "screenshots" {
     $env:PLAYWRIGHT_BROWSERS_PATH = Join-Path $T "ms-playwright"

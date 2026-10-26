@@ -45,7 +45,7 @@ code { font-family: var(--mono); font-size: .85em; background: var(--surface-2);
 .topbar-title h1 { font-size: 1.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar-title p { font-size: .8rem; color: var(--text-3); }
 .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-.content { padding: 16px 24px 40px; display: flex; flex-direction: column; gap: 16px; }
+.content { flex: 1 0 auto; padding: 16px 24px 40px; display: flex; flex-direction: column; gap: 16px; }
 .btn.menu-toggle { display: none; }
 
 /* filter bar */
@@ -214,7 +214,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 .landing-status { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; font-size: .86rem; color: #a7b3c2; }
 .landing .btn-primary { background: #e0a040; border-color: #e0a040; color: #111; } .landing .btn-primary:hover { background: #f0b860; color: #111; }
 .landing .pill-sim { background: #2a2414; border-color: #5a4a20; color: #f0c674; }
-.landing-foot { margin-top: auto; padding: 18px 32px; border-top: 1px solid #1c2633; font-size: .78rem; color: #7d8a9b; }
+.landing-foot { margin-top: auto; padding: 18px 32px; border-top: 1px solid #1c2633; font-size: .78rem; color: #7d8a9b; overflow-wrap: anywhere; }
 
 /* responsive: laptop, tablet */
 @media (max-width: 1280px) { .g-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .g-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -232,3 +232,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
   .content { padding: 12px; } .topbar { padding: 8px 12px; flex-wrap: wrap; } .topbar-right { width: 100%; } .search { width: 100%; }
   .pillars { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* shared credit footer */
+.app-foot { border-top: 1px solid var(--border); padding: 12px 24px; font-size: .78rem; color: var(--text-2); text-align: center; overflow-wrap: anywhere; }
+.landing-credit { margin-top: 6px; color: #a7b3c2; }

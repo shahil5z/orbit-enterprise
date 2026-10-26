@@ -408,7 +408,7 @@ class InsightService:
             recs = self.core.recommendations(None)["recommendations"]
             names = self.repo.region_names()
             t = r["monte_carlo"]["total"]
-            lines = ["# ORBIT // ENTERPRISE risk report", "", "Simulated enterprise dataset. Run " + r["run_id"] + ".", "",
+            lines = ["# ORBIT ENTERPRISE risk report", "", "Simulated enterprise dataset. Run " + r["run_id"] + ".", "",
                      "## Portfolio revenue at risk (6 months, C++ Monte Carlo, "
                      f"{r['monte_carlo']['simulations']:,} simulations)", "",
                      f"- Expected {t['expected']:,.0f}; P5 {t['p5']:,.0f}; P95 {t['p95']:,.0f}",

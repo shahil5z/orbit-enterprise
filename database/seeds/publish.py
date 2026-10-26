@@ -52,8 +52,25 @@ def _tables_in_fk_order(conn) -> list[str]:
     return [t for t in order if t not in SKIP]
 
 
+def _scrub_paths(value: object, root: Path = PATHS.root) -> object:
+    """Rewrite absolute workstation paths as project-relative ones so the hosted API never exposes them."""
+    if isinstance(value, dict):
+        return {k: _scrub_paths(v, root) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_scrub_paths(v, root) for v in value]
+    if isinstance(value, str) and len(value) < 1024:
+        p = Path(value)
+        if p.is_absolute():
+            try:
+                return p.relative_to(root).as_posix()
+            except ValueError:
+                return p.name
+    return value
+
+
 def _artifacts(out: Path) -> dict[str, object]:
-    docs = {rel: json.loads((out / rel).read_text(encoding="utf-8")) for rel in JSON_ARTIFACTS if (out / rel).exists()}
+    docs = {rel: _scrub_paths(json.loads((out / rel).read_text(encoding="utf-8")))
+            for rel in JSON_ARTIFACTS if (out / rel).exists()}
     test = out / "ml" / "forecast_test_predictions.parquet"
     if test.exists():
         t = pd.read_parquet(test)

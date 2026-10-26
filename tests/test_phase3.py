@@ -149,3 +149,13 @@ def test_publish_round_trip_to_a_second_database():
     finally:
         with psycopg.connect(SETTINGS.dsn, autocommit=True) as c:
             c.execute("DROP DATABASE IF EXISTS orbit_publish_test")
+
+
+def test_publish_scrubs_workstation_paths(tmp_path):
+    from database.seeds.publish import _scrub_paths
+    doc = {"output_csv": str(tmp_path / "data" / "outputs" / "rust" / "x.csv"), "n": 3,
+           "list": [str(tmp_path / "a.json"), "plain text", "rel/path.csv"]}
+    clean = _scrub_paths(doc, root=tmp_path)
+    assert clean == {"output_csv": "data/outputs/rust/x.csv", "n": 3, "list": ["a.json", "plain text", "rel/path.csv"]}
+    outside = _scrub_paths({"p": str(tmp_path.parent / "elsewhere" / "f.csv")}, root=tmp_path)
+    assert outside == {"p": "f.csv"}

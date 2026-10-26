@@ -1,4 +1,4 @@
-"""ORBIT // ENTERPRISE REST API (FastAPI). Run: uvicorn apps.api.orbit_api.main:app --port 8000"""
+"""ORBIT ENTERPRISE REST API (FastAPI). Run: uvicorn apps.api.orbit_api.main:app --port 8000"""
 from __future__ import annotations
 
 from datetime import date
@@ -37,7 +37,7 @@ def create_app(repo: Repository | None = None, local_engines: bool | None = None
     if problems:
         raise RuntimeError("invalid production configuration: " + "; ".join(problems))
     prod = SETTINGS.env == "prod"
-    app = FastAPI(title="ORBIT // ENTERPRISE API", version="2.1.0",
+    app = FastAPI(title="ORBIT ENTERPRISE API", version="2.1.0",
                   description="Decision intelligence API over simulated enterprise data. All responses use the "
                               "envelope {success, data, metadata, errors}.",
                   docs_url=None if prod else "/docs", redoc_url=None, openapi_url="/api/v1/openapi.json" if prod

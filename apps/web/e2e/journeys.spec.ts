@@ -96,6 +96,10 @@ test("every page renders without console errors", async ({ page }) => {
     await page.goto(p);
     await page.waitForLoadState("networkidle");
     await expect(page.locator(".state-error")).toHaveCount(0);
+    await expect(page).toHaveTitle(/^ORBIT ENTERPRISE( \| .+)?$/);
+    await expect(page.getByTestId("site-footer")).toHaveText("An independent portfolio project \u00b7 \u00a9 2026 Shahil");
+    await expect(page.getByTestId("site-footer")).toBeVisible();
+    expect(await page.locator("body").innerText(), `legacy branding on ${p}`).not.toMatch(/ORBIT\s*\/\/|\/\/\s*ENTERPRISE/);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, `horizontal overflow on ${p}`).toBeLessThanOrEqual(1);
   }

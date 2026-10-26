@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { FilterBar } from "../components/shared/FilterBar";
+import { SiteFooter } from "../components/shared/SiteFooter";
 import { StatusIndicator } from "../components/ui";
 import { useApi } from "../hooks/useApi";
 import { api } from "../services/api";
@@ -22,7 +23,7 @@ export function Layout() {
       <aside className={`sidebar ${open ? "open" : ""}`} aria-label="Primary">
         <NavLink to="/" className="brand">
           <img src="/logo-64.png" alt="" width={34} height={34} />
-          <span><span className="brand-name">ORBIT // ENTERPRISE</span><br /><span className="brand-sub">DECISION INTELLIGENCE</span></span>
+          <span><span className="brand-name">ORBIT ENTERPRISE</span><br /><span className="brand-sub">DECISION INTELLIGENCE</span></span>
         </NavLink>
         <nav className="nav">
           {GROUPS.map((g) => (
@@ -38,7 +39,7 @@ export function Layout() {
         <header className="topbar">
           <button type="button" className="btn btn-secondary btn-sm menu-toggle" aria-expanded={open} onClick={() => setOpen((o) => !o)}>Menu</button>
           <div className="topbar-title">
-            <h1>{route?.label ?? "ORBIT"}</h1>
+            <h1>{route?.label ?? "ORBIT ENTERPRISE"}</h1>
             <p>{route?.subtitle}</p>
           </div>
           <div className="topbar-right">
@@ -51,6 +52,7 @@ export function Layout() {
           {route && <FilterBar keys={route.filters} note={route.filters.length ? "Filters persist across pages and in the URL" : undefined} />}
           <Outlet />
         </main>
+        <SiteFooter />
       </div>
     </div>
   );
