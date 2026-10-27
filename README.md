@@ -77,7 +77,7 @@ The Java service exposes simulated CRM accounts and ERP suppliers and purchase o
 
 ## End-to-End Pipeline
 
-`pipelines/orchestrator.py` runs all 11 stages in order and records per-stage status, duration, record counts and errors in `pipeline_runs`.
+The pipeline executes 11 stages from data ingestion through publishing and decision intelligence.
 
 | # | Stage | Technology | Purpose |
 |---|---|---|---|
@@ -179,16 +179,6 @@ The 8 ID-based production endpoints were tested with valid and invalid IDs. Vali
 | `models/{version}` | 200 | 404 | Pass |
 | `operations/runs/{id}` | 200 | 404 | Pass |
 
-```powershell
-.\scripts\orbit.ps1 test        # pytest
-.\scripts\orbit.ps1 java-test   # Java SelfTest
-.\scripts\orbit.ps1 web-test    # eslint + tsc + vitest
-.\scripts\orbit.ps1 web-build   # production build
-.\scripts\orbit.ps1 e2e         # Playwright at 4 widths
-```
-
-Setting `ORBIT_WEB_URL=https://orbit-enterprise.vercel.app` runs the same Playwright suite, including `e2e/id-endpoints.spec.ts`, against production.
-
 ## Production Architecture
 
 ```mermaid
@@ -206,7 +196,7 @@ flowchart LR
 ## Security
 
 - No secrets committed; database credentials are held only in server-side environment variables
-- Same-origin API; CORS rejects foreign origins
+- Same-origin API; CORS rejects unauthorized origins
 - CSP, HSTS, X-Frame-Options, nosniff, Referrer-Policy and Permissions-Policy headers
 - 32 KB request body limit and per-instance rate limiting
 - Sanitized errors without stack traces; a request ID on every API response and structured JSON API logs
