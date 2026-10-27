@@ -29,52 +29,11 @@
 
 ---
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Key Capabilities](#key-capabilities)
-- [Architecture](#architecture)
-- [End-to-End Pipeline](#end-to-end-pipeline)
-- [Technology Stack](#technology-stack)
-- [Engineering & Model Results](#engineering--model-results)
-- [Data Quality](#data-quality)
-- [Model Intelligence](#model-intelligence)
-- [System & Pipeline Observability](#system--pipeline-observability)
-- [Testing](#testing)
-- [Production Architecture](#production-architecture)
-- [Data Notice](#data-notice)
-- [Limitations](#limitations)
-- [Project Structure](#project-structure)
-- [Documentation](#documentation)
-- [License](#license)
-- [Author](#author)
-
----
-
 ## Overview
 
-ORBIT ENTERPRISE is an end-to-end enterprise data and decision intelligence platform. It demonstrates an integrated enterprise data architecture in which business data moves through one governed flow:
+ORBIT ENTERPRISE is an end-to-end enterprise data and decision intelligence platform. It takes simulated enterprise data through data engineering, analytics, machine learning, risk simulation, optimization and decision intelligence, and serves the results through a governed API and web interface.
 
-```
-business data > ingestion > validation > transformation > distributed processing > statistics
-  > machine learning > risk analysis > optimization > decision workflows > governed API > web interface
-```
-
-Each technology has one clear responsibility:
-
-| Layer | Responsibility |
-|---|---|
-| Python | Orchestrates the pipeline |
-| Spark / Scala | Curates data at scale |
-| R | Statistical analysis |
-| Rust | High-performance scoring |
-| C++ | Monte Carlo risk simulation |
-| Julia | Optimization |
-| PostgreSQL / Neon | Persists results |
-| FastAPI | Serves the API |
-| React / TypeScript | Web interface |
-
-Decisions come from models, statistics, simulation, optimization and a rules engine. There is no LLM in the decision path, and the platform is not an agent system.
+Every recommendation can be traced back through its forecast, model, metric and dataset. Decisions come from models, statistics, simulation, optimization and a rules engine. ORBIT is a deterministic analytical platform: there is no LLM in the decision path, and it is not a chatbot or an agent system.
 
 ## Key Capabilities
 
@@ -118,29 +77,21 @@ The Java service exposes simulated CRM accounts and ERP suppliers and purchase o
 
 ## End-to-End Pipeline
 
-`pipelines/orchestrator.py` runs all 11 stages in order.
+`pipelines/orchestrator.py` runs all 11 stages in order and records per-stage status, duration, record counts and errors in `pipeline_runs`.
 
 | # | Stage | Technology | Purpose |
 |---|---|---|---|
 | 1 | INGEST | Python | Load CSV, JSON and Parquet sources into the raw zone (421,862 records) |
-| 2 | VALIDATE | Python | Schema and quality rules, quality scores, quarantine of failing records |
+| 2 | VALIDATE | Python | Validate schemas, score quality, quarantine failures |
 | 3 | TRANSFORM | Python, pandas | Conform and join sources into staging tables |
 | 4 | CURATE | Spark / Scala | Distributed aggregation into curated datasets |
 | 5 | ANALYZE | Python + R | KPIs, trends, segmentation and statistical tests |
-| 6 | TRAIN | scikit-learn, statsmodels | Forecast, churn, anomaly and segmentation models, registered with versions |
-| 7 | PREDICT | Python + Rust | Batch scoring; Rust robust anomaly scorer benchmarked against Python |
-| 8 | RISK | Python + C++ | Factor-based risk scores and 200,000-path Monte Carlo revenue-at-risk |
+| 6 | TRAIN | scikit-learn, statsmodels | Train and register versioned forecast, churn, anomaly and segmentation models |
+| 7 | PREDICT | Python + Rust | Batch scoring; Rust anomaly scorer benchmarked against Python |
+| 8 | RISK | Python + C++ | Risk scores and 200,000-path Monte Carlo revenue-at-risk |
 | 9 | OPTIMIZE | Julia (JuMP + HiGHS) | Mixed-integer budget and hiring allocation |
 | 10 | DECISION | Python | Prioritized recommendations with evidence references |
-| 11 | PUBLISH | PostgreSQL | Load all outputs, lineage and model metadata into the warehouse |
-
-> **Latest verified local run** (`20261026T190344Z-3ee718d0`, published to the production database on 2026-10-27)
->
-> - 11/11 stages successful
-> - About 54 seconds end to end
-> - 467,465 rows written by the PUBLISH stage for this run (421,561 core entity rows + 45,904 run-output rows). Total persisted rows in the warehouse are higher because earlier runs' predictions, recommendations, quality results, optimization runs and stage records are kept as history.
->
-> This is a local workstation run on the simulated dataset, not a production-scale benchmark.
+| 11 | PUBLISH | PostgreSQL | Load outputs, lineage and model metadata into the warehouse |
 
 ## Technology Stack
 
@@ -178,7 +129,7 @@ The naive forecast baseline still wins in 4 of 6 regions, and the Forecasts page
 
 ## Data Quality
 
-Every dataset is scored against a fixed set of rule families. Failing records go to a quarantine zone together with the rule that rejected them.
+Every dataset is scored against these rule families. Failing records are quarantined with the rule that rejected them.
 
 | Check | What it covers |
 |---|---|
@@ -189,13 +140,11 @@ Every dataset is scored against a fixed set of rule families. Failing records go
 | Consistency | Agreement between related fields |
 | Referential integrity | Foreign keys that resolve to known entities |
 
-The Data Quality page shows scores per dataset, issue details, ingestion counts and pipeline status.
-
 ## Model Intelligence
 
 - Versioned model artifacts in `ml/artifacts`
-- Model registry in the `model_runs` table with parameters, test metrics and baselines
-- Prediction metadata linking every downstream prediction to its model version
+- Model registry in `model_runs` with parameters, test metrics and baselines
+- Prediction metadata linking every prediction to its model version
 - Model Intelligence page comparing each model with its baseline
 
 Every recommendation carries a traceable "Why?" chain:
@@ -203,13 +152,6 @@ Every recommendation carries a traceable "Why?" chain:
 ```
 recommendation > forecast > model output > metric > dataset
 ```
-
-## System & Pipeline Observability
-
-- Pipeline run IDs with per-stage status, duration, record counts and errors, stored in `pipeline_runs`
-- Run history and warehouse table counts on the System & Pipeline page
-- Rust vs Python scoring benchmark
-- A request ID on every API response and structured JSON API logs
 
 ## Testing
 
@@ -224,7 +166,7 @@ recommendation > forecast > model output > metric > dataset
 | Production build (Vite) | Passing |
 | Playwright on production (desktop, laptop, tablet, mobile) | 20 passed |
 
-The 8 ID-based production endpoints were explicitly tested with both valid and invalid IDs.
+The 8 ID-based production endpoints were tested with valid and invalid IDs. Valid IDs are discovered from the live list endpoints, and no error response leaked internal details.
 
 | Endpoint | Valid ID | Invalid ID | Result |
 |---|---|---|---|
@@ -236,8 +178,6 @@ The 8 ID-based production endpoints were explicitly tested with both valid and i
 | `optimization/{id}` | 200 | 404 | Pass |
 | `models/{version}` | 200 | 404 | Pass |
 | `operations/runs/{id}` | 200 | 404 | Pass |
-
-None of the tested error responses leaked internal details. Valid IDs are discovered from the live list endpoints, not hardcoded.
 
 ```powershell
 .\scripts\orbit.ps1 test        # pytest
@@ -259,20 +199,18 @@ flowchart LR
   FAPI --> UI["React / TypeScript on Vercel<br/>same origin, /api/v1"]
 ```
 
-- Heavy computational workloads stay on the local workstation.
-- Vercel does not run Spark, Julia or model training; the hosted API serves the persisted results.
-- In the hosted demo, the Optimization page shows the latest persisted run and explains that new solves run locally.
-- This split is intentional and keeps the serverless function small and transparent about where compute happens.
+- Vercel serves the web app and the API; Neon persists the results.
+- Heavy compute (Spark, Julia, model training) runs outside Vercel on the local workstation.
+- The live app reads the persisted results; the hosted Optimization page shows the latest persisted run, and new solves run locally.
 
-### Security
+## Security
 
+- No secrets committed; database credentials are held only in server-side environment variables
 - Same-origin API; CORS rejects foreign origins
 - CSP, HSTS, X-Frame-Options, nosniff, Referrer-Policy and Permissions-Policy headers
 - 32 KB request body limit and per-instance rate limiting
-- Sanitized errors without stack traces
-- Interactive API docs page disabled in production (the `/api/v1/openapi.json` schema remains public)
-- Database credentials held only in server-side environment variables
-- No secrets committed to the repository
+- Sanitized errors without stack traces; a request ID on every API response and structured JSON API logs
+- Interactive API docs page disabled in production; the `/api/v1/openapi.json` schema remains public
 
 ## Data Notice
 
@@ -287,54 +225,22 @@ flowchart LR
 
 ## Limitations
 
-These are known deployment boundaries of the hosted demo:
-
+- The dataset is synthetic and optimization coefficients include planning assumptions (see Data Notice).
 - Heavy compute runs locally; the hosted site serves the latest published run and cannot solve new optimization parameters.
 - No authentication: the demo is public and read-mostly. Write endpoints are limited to scenario runs and the optimization request, which does not mutate data when hosted.
 - Rate limiting is per function instance, not global.
-- Vercel cold starts add latency to the first request after idle; the heaviest views take a few seconds.
+- Vercel cold starts add latency after idle; the heaviest views take a few seconds.
 - BI guides for Tableau, Power BI and QlikView are not tested inside those tools.
-
-## Project Structure
-
-```
-orbit-enterprise/
-├── analytics/      Python, R, Rust, C++ and Julia analytics engines
-├── api/            Vercel Python function entrypoint
-├── apps/
-│   ├── api/        FastAPI routes, services, repository, security middleware
-│   └── web/        React + TypeScript app, tests and Playwright e2e
-├── bi/             Tableau, Power BI and QlikView export
-├── configs/        Source definitions
-├── data/
-│   └── samples/    Sample CRM and ERP source files
-├── database/       Migrations, schema views and seeds (load, publish)
-├── decision/       Decision engine and scenarios
-├── docs/           Documentation and screenshots
-├── ml/             Forecasting, classification, anomaly detection, risk, evaluation
-├── optimization/   Optimization workflow
-├── orbit_core/     Shared configuration, I/O, KPI definitions, logging and run tracking
-├── pipelines/      Ingestion, validation, transformation, Spark, orchestrator
-├── scripts/        env.ps1 and orbit.ps1
-├── services/
-│   └── java/       CRM / ERP integration service
-├── tests/          pytest suites
-├── LICENSE
-├── README.md
-└── vercel.json     Build, function, rewrites and security headers
-```
 
 ## Documentation
 
-| Area | Documents |
-|---|---|
-| Architecture | [Architecture](docs/architecture.md), [Technology rationale](docs/technology-rationale.md), [Data model](docs/data-model.md) |
-| Data Pipeline | [Data pipeline](docs/data-pipeline.md), [KPI governance](docs/kpi-governance.md) |
-| ML System | [ML system](docs/ml-system.md) |
-| Optimization | [Optimization](docs/optimization.md) |
-| Decision Intelligence | [Decision intelligence](docs/decision-intelligence.md) |
-| API | [API](docs/api.md) |
-| BI | [BI overview](docs/bi/README.md), [Tableau](docs/bi/tableau.md), [Power BI](docs/bi/powerbi.md), [QlikView](docs/bi/qlikview.md) |
+The repository is organized around data pipelines, analytics, ML, optimization, decision intelligence, API services, web applications, BI exports and tests.
+
+- Architecture: [Architecture](docs/architecture.md), [Technology rationale](docs/technology-rationale.md), [Data model](docs/data-model.md)
+- Data: [Data pipeline](docs/data-pipeline.md), [KPI governance](docs/kpi-governance.md)
+- ML and decisions: [ML system](docs/ml-system.md), [Optimization](docs/optimization.md), [Decision intelligence](docs/decision-intelligence.md)
+- API: [API](docs/api.md)
+- BI: [BI overview](docs/bi/README.md), [Tableau](docs/bi/tableau.md), [Power BI](docs/bi/powerbi.md), [QlikView](docs/bi/qlikview.md)
 
 ## Author
 
