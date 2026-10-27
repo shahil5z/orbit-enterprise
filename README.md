@@ -112,24 +112,7 @@ Decisions come from models, statistics, simulation, optimization and a rules eng
 
 ## Architecture
 
-```mermaid
-flowchart TD
-  RAW["Raw enterprise data<br/>simulated CRM, ERP, finance, HR, operations"] --> ING["Ingestion<br/>Python"]
-  ING --> VAL["Validation and quality<br/>Python"]
-  VAL --> TR["Transformation<br/>Python"]
-  TR --> SP["Curation<br/>Spark / Scala"]
-  SP --> AN["Analytics + statistics<br/>Python + R"]
-  AN --> ML["ML training<br/>scikit-learn, statsmodels"]
-  ML --> PR["Prediction<br/>Python + Rust"]
-  PR --> RK["Risk<br/>Python + C++ Monte Carlo"]
-  RK --> OPT["Optimization<br/>Julia JuMP + HiGHS"]
-  OPT --> DEC["Decision intelligence<br/>Python rules engine"]
-  DEC --> PG[("PostgreSQL local / Neon hosted")]
-  PG --> API["FastAPI"]
-  API --> WEB["React / TypeScript web interface"]
-  JAVA["Java integration service<br/>simulated CRM / ERP REST API<br/>not a pipeline stage"] -.- ING
-  style JAVA stroke-dasharray: 5 5
-```
+<p align="center"><img src="docs/architecture.png" alt="ORBIT ENTERPRISE architecture" width="100%"></p>
 
 The Java service exposes simulated CRM accounts and ERP suppliers and purchase orders over REST. It runs alongside the platform as an integration endpoint; the orchestrator ingests the same sources from files, so the Java service is not a pipeline stage.
 
